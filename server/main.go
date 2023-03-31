@@ -1,20 +1,29 @@
 package main
 
 import (
-	"fmt"
+	"log"
+	"os"
 
+	"github.com/VashUber/coursework-go/server/db"
 	"github.com/gofiber/fiber/v2"
+	"github.com/joho/godotenv"
 )
 
 func main() {
+	err := godotenv.Load(".env")
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	app := fiber.New()
+	db.CreateConnection()
 
-	api := app.Group("/api")
-	api.Get("/hello", func(c *fiber.Ctx) error {
-		name := c.Query("name", "unknown")
+	port := os.Getenv("PORT")
 
-		return c.SendString(fmt.Sprintf("Hello, %s", name))
-	})
+	if len(port) == 0 {
+		port = ":3000"
+	}
 
-	app.Listen(":3000")
+	app.Listen(port)
 }
