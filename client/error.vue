@@ -26,7 +26,7 @@ useHead({
   justify-content: center;
   gap: 10px;
   font-weight: bold;
-  background: url("./assets/bg/waves.svg") #fcfcfe no-repeat;
+  background: url("./assets/bg/waves.svg") $bg-main no-repeat;
   background-size: cover;
 
   & > h1 {

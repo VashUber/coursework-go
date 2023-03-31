@@ -1,16 +1,24 @@
-<script setup lang="ts">
-const switchLocalePath = useSwitchLocalePath();
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <div>
-    <div style="display: flex; gap: 20px">
-      <NuxtLink :to="switchLocalePath('ru')">ru</NuxtLink>
-      <NuxtLink :to="switchLocalePath('en')">en</NuxtLink>
+  <div class="layout">
+    <layout-header />
+    <div class="wrapper layout__content">
+      <slot />
     </div>
-
-    <slot />
+    <layout-footer />
   </div>
 </template>
 
-<style scoped></style>
+<style scoped lang="scss">
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  height: 1px;
+
+  &__content {
+    flex-grow: 1;
+  }
+}
+</style>

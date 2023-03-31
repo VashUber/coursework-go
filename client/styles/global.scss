@@ -6,3 +6,22 @@
   font-family: "Jost", sans-serif;
   color: $main-font;
 }
+
+body {
+  background: $bg-main;
+}
+
+.wrapper {
+  max-width: $screen-lg;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+
+  @media (max-width: $screen-md) {
+    padding: 10px;
+  }
+}
+
+.page {
+  height: 100%;
+}
