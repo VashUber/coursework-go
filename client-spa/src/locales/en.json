@@ -1,3 +1,7 @@
 {
-  "hello": "hello, {v}"
+  "hello": "hello, {v}",
+  "lang": {
+    "en": "English",
+    "ru": "Русский"
+  }
 }

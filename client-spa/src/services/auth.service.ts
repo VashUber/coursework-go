@@ -1,1 +1,3 @@
-export {};
+export const auth = {
+  signin: async () => {},
+};
