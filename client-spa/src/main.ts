@@ -7,12 +7,13 @@ import { auth } from "~/services/auth.service";
 import "~/styles/tailwind.css";
 
 const setup = async () => {
-  const app = createApp(App);
-  app.use(router);
-  app.use(i18n);
-
   try {
+    const app = createApp(App);
+    app.use(router);
+    app.use(i18n);
+
     await Promise.all([loadLocaleAsync(), auth.getUserInfo()]);
+
     app.mount("#app");
   } catch (e) {
     console.log(e);
