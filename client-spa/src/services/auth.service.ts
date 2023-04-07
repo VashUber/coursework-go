@@ -4,6 +4,10 @@ export const auth = {
   signin: async () => {},
   signup: async () => {},
   getUserInfo: async () => {
-    await $http("/api");
+    try {
+      const data = (await $http("/api/auth/get-user-info")).data;
+    } catch (e) {
+      throw e;
+    }
   },
 };

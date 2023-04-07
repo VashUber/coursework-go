@@ -1,15 +1,14 @@
 <script setup lang="ts">
-import { useI18n } from "vue-i18n";
-import Default from "./layouts/Default.vue";
-const { t } = useI18n();
+import Head from "./components/meta/Head.vue";
 </script>
 
 <template>
-  <Default>
-    <div>
-      {{ t("hello", { v: "egor" }) }}
-    </div>
-  </Default>
+  <Head />
+  <router-view />
 </template>
 
-<style scoped></style>
+<style>
+body {
+  @apply bg-gray-200;
+}
+</style>

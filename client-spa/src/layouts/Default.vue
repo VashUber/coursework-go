@@ -14,7 +14,9 @@ const { locale } = useI18n();
     <div @click="changeLocale('en')" v-else>en</div>
   </div>
 
-  <slot></slot>
+  <div>
+    <router-view />
+  </div>
 </template>
 
 <style scoped></style>

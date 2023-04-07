@@ -4,6 +4,7 @@ import en from "~/locales/en.json";
 
 const langCookie = cookies.get("app_lang") || "";
 const availableLangs = ["ru", "en"];
+const lang = availableLangs.indexOf(langCookie) > -1 ? langCookie : "en";
 
 export const i18n = createI18n({
   locale: "en",
@@ -11,6 +12,19 @@ export const i18n = createI18n({
   legacy: false,
   messages: {
     en,
+  },
+});
+
+export const i18nError = createI18n({
+  locale: lang,
+  legacy: false,
+  messages: {
+    en: {
+      text: "Something went wrong. Try to reload the page",
+    },
+    ru: {
+      text: "Что-то пошло не так. Попробуйте перезагрузить страницу",
+    },
   },
 });
 
@@ -22,8 +36,6 @@ export const changeLocale = (locale: "en" | "ru") => {
 };
 
 export const loadLocaleAsync = async () => {
-  const lang = availableLangs.indexOf(langCookie) > -1 ? langCookie : "en";
-
   if (lang === "en") return;
 
   const locale = await import(`../locales/${lang}.json`);
