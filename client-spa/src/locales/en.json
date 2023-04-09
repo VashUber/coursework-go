@@ -3,5 +3,9 @@
   "lang": {
     "en": "English",
     "ru": "Russian"
+  },
+  "misc": {
+    "signin": "Signin",
+    "signup": "Signup"
   }
 }
