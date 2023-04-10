@@ -9,6 +9,7 @@ import (
 	"github.com/VashUber/coursework-go/server/router"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/joho/godotenv"
 )
 
@@ -26,6 +27,7 @@ func main() {
 		AllowOrigins:     "http://localhost:4020",
 		AllowCredentials: true,
 	}))
+	app.Use(logger.New())
 
 	router.InitAllRoutes(app)
 	db.CreateConnection()

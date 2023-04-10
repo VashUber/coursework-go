@@ -7,18 +7,28 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func CreateUser() {
-	db.Database.Create(&models.User{
-		Name:     "string",
-		Email:    "string",
-		Password: "string",
-	})
-}
-
 func Signup(c *fiber.Ctx) error {
-	return c.JSON(fiber.Map{
-		"message": "signup",
+	type SignupBody struct {
+		Email    string `json:"email"`
+		Password string `json:"password"`
+		Name     string `json:"string"`
+		Age      uint8  `json:"age"`
+	}
+
+	body := SignupBody{}
+	err := c.BodyParser(&body)
+	if err != nil {
+		return c.SendStatus(fiber.StatusBadRequest)
+	}
+
+	db.Database.Create(&models.User{
+		Name:     body.Name,
+		Email:    body.Email,
+		Password: body.Password,
+		Age:      body.Age,
 	})
+
+	return c.SendStatus(fiber.StatusAccepted)
 }
 
 func Signin(c *fiber.Ctx) error {
@@ -42,7 +52,7 @@ func Signin(c *fiber.Ctx) error {
 		return c.SendStatus(fiber.StatusUnauthorized)
 	}
 
-	sess.Set("email", body.Email)
+	sess.Set("id", body.Email)
 	if err := sess.Save(); err != nil {
 		panic(err)
 	}
@@ -51,6 +61,7 @@ func Signin(c *fiber.Ctx) error {
 }
 
 func GetUserInfo(c *fiber.Ctx) error {
+	// TODO
 	return c.JSON(fiber.Map{
 		"message": "get-user-info",
 	})
