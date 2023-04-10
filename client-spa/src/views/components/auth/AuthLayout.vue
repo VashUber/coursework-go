@@ -2,7 +2,7 @@
   <div
     class="w-full flex items-center justify-center gap-40 h-[calc(100vh_-_60px)] mx-4"
   >
-    <form class="flex-grow flex flex-col gap-2 items-center" @submit.prevent>
+    <form class="flex-grow flex flex-col gap-4 items-center" @submit.prevent>
       <slot name="form" />
     </form>
     <div
