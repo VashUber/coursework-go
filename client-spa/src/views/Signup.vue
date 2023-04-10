@@ -3,17 +3,20 @@ import { ref } from "vue";
 import Input from "~/components/ui/Input.vue";
 import Button from "~/components/ui/Button.vue";
 import AuthLayout from "./components/auth/AuthLayout.vue";
+import { auth } from "~/services/auth.service";
 
-const onSubmit = () => {
-  console.log(formData.value);
+const onSubmit = async () => {
+  await auth.signup({
+    email: formData.value.email,
+    password: formData.value.password,
+    name: formData.value.name,
+  });
 };
 
 const formData = ref({
   email: "",
   password: "",
   name: "",
-  surname: "",
-  age: "",
 });
 </script>
 
@@ -22,8 +25,6 @@ const formData = ref({
     <template #form>
       <Input v-model="formData.email"> Email </Input>
       <Input v-model="formData.name"> Name </Input>
-      <Input v-model="formData.surname"> Surname </Input>
-      <Input v-model="formData.age"> Age </Input>
       <Input v-model="formData.password"> Password </Input>
 
       <Button type="submit">Register</Button>

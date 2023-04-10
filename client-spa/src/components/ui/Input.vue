@@ -2,7 +2,7 @@
 import { toRefs } from "vue";
 
 const props = defineProps<{
-  modelValue: string;
+  modelValue: string | number;
 }>();
 
 const emits = defineEmits<{

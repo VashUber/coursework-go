@@ -11,7 +11,7 @@ func Signup(c *fiber.Ctx) error {
 	type SignupBody struct {
 		Email    string `json:"email"`
 		Password string `json:"password"`
-		Name     string `json:"string"`
+		Name     string `json:"name"`
 		Age      uint8  `json:"age"`
 	}
 
@@ -25,7 +25,6 @@ func Signup(c *fiber.Ctx) error {
 		Name:     body.Name,
 		Email:    body.Email,
 		Password: body.Password,
-		Age:      body.Age,
 	})
 
 	return c.SendStatus(fiber.StatusAccepted)

@@ -5,8 +5,8 @@ import Button from "~/components/ui/Button.vue";
 import AuthLayout from "./components/auth/AuthLayout.vue";
 import { auth } from "~/services/auth.service";
 
-const onSubmit = () => {
-  auth.signin({
+const onSubmit = async () => {
+  await auth.signin({
     email: formData.value.email,
     password: formData.value.password,
   });

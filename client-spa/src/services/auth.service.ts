@@ -8,7 +8,13 @@ export const auth = {
       throw e;
     }
   },
-  signup: async () => {},
+  signup: async (body: { email: string; password: string; name: string }) => {
+    try {
+      await $http.post("/api/auth/signup", body);
+    } catch (e) {
+      throw e;
+    }
+  },
   getUserInfo: async () => {
     try {
       const data = (await $http("/api/auth/get-user-info")).data;
