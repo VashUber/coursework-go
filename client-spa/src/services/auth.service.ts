@@ -1,14 +1,7 @@
 import { $http } from "~/libs/axios";
 
 export const auth = {
-  signin: async (body: {
-    username: string;
-    name: string;
-    surname: string;
-    email: string;
-    age: number;
-    password: string;
-  }) => {
+  signin: async (body: { email: string; password: string }) => {
     try {
       await $http.post("/api/auth/signin", body);
     } catch (e) {
