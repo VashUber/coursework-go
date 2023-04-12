@@ -43,7 +43,6 @@ func Signin(c *fiber.Ctx) error {
 	}
 
 	var user models.User
-
 	db.Database.Where("email = ?", body.Email).Find(&user)
 
 	if user.Password != body.Password {
@@ -74,6 +73,11 @@ func GetUserInfo(c *fiber.Ctx) error {
 		return c.JSON(fiber.Map{
 			"user": nil,
 		})
+	}
+
+	if !sess.Fresh() {
+		sess.Destroy()
+		return c.Redirect("/signin", fiber.StatusUnauthorized)
 	}
 
 	var user models.User

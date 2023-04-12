@@ -27,6 +27,7 @@ func SessionChecker(c *fiber.Ctx) error {
 	}
 
 	if !sess.Fresh() {
+		sess.Destroy()
 		return c.Redirect("/signin", fiber.StatusUnauthorized)
 	}
 
