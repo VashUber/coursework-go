@@ -1,4 +1,6 @@
 import { $http } from "~/libs/axios";
+import { IUser } from "types/user";
+import { useUser } from "~/composables/user";
 
 export const auth = {
   signin: async (body: { email: string; password: string }) => {
@@ -16,8 +18,18 @@ export const auth = {
     }
   },
   getUserInfo: async () => {
+    const { setUser } = useUser();
+
     try {
-      const data = (await $http("/api/auth/get-user-info")).data;
+      const response = (
+        await $http<{
+          user: IUser | null;
+        }>("/api/auth/get-user-info")
+      ).data;
+
+      if (response.user) {
+        setUser(response.user);
+      }
     } catch (e) {
       throw e;
     }

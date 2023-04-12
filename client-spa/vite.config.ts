@@ -11,6 +11,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "~": resolve(__dirname, "./src"),
+      types: resolve(__dirname, "./src/shared-types"),
     },
   },
   server: {
