@@ -1,6 +1,8 @@
 package middleware
 
 import (
+	"time"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/session"
 )
@@ -10,6 +12,8 @@ var SessionStorage *session.Store
 func InitSessionStorage() {
 	SessionStorage = session.New(session.Config{
 		CookieHTTPOnly: true,
+		CookieSecure:   true,
+		Expiration:     time.Hour * 36,
 	})
 }
 
@@ -23,13 +27,9 @@ func SessionChecker(c *fiber.Ctx) error {
 	_, ok := sess.Get("id").(string)
 
 	if !ok {
-		return c.SendStatus(fiber.StatusForbidden)
-	}
-
-	if !sess.Fresh() {
 		sess.Destroy()
 		return c.Redirect("/signin", fiber.StatusUnauthorized)
 	}
 
-	return nil
+	return c.Next()
 }

@@ -5,6 +5,7 @@ import (
 	"github.com/VashUber/coursework-go/server/middleware"
 	"github.com/VashUber/coursework-go/server/models"
 	"github.com/gofiber/fiber/v2"
+	"golang.org/x/crypto/bcrypt"
 )
 
 func Signup(c *fiber.Ctx) error {
@@ -21,10 +22,15 @@ func Signup(c *fiber.Ctx) error {
 		return c.SendStatus(fiber.StatusBadRequest)
 	}
 
+	password, err := bcrypt.GenerateFromPassword([]byte(body.Password), 10)
+	if err != nil {
+		return c.SendStatus(fiber.StatusBadRequest)
+	}
+
 	db.Database.Create(&models.User{
 		Name:     body.Name,
 		Email:    body.Email,
-		Password: body.Password,
+		Password: string(password),
 	})
 
 	return c.SendStatus(fiber.StatusAccepted)
@@ -45,7 +51,9 @@ func Signin(c *fiber.Ctx) error {
 	var user models.User
 	db.Database.Where("email = ?", body.Email).Find(&user)
 
-	if user.Password != body.Password {
+	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(body.Password))
+
+	if err != nil {
 		return c.SendStatus(fiber.StatusUnauthorized)
 	}
 
@@ -73,11 +81,6 @@ func GetUserInfo(c *fiber.Ctx) error {
 		return c.JSON(fiber.Map{
 			"user": nil,
 		})
-	}
-
-	if !sess.Fresh() {
-		sess.Destroy()
-		return c.Redirect("/signin", fiber.StatusUnauthorized)
 	}
 
 	var user models.User
