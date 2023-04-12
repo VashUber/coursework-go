@@ -24,9 +24,9 @@ func SessionChecker(c *fiber.Ctx) error {
 		panic(err)
 	}
 
-	_, ok := sess.Get("id").(string)
+	id := sess.Get("id")
 
-	if !ok {
+	if id == nil {
 		sess.Destroy()
 		return c.Redirect("/signin", fiber.StatusUnauthorized)
 	}
