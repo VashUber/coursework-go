@@ -36,22 +36,26 @@ func Signin(c *fiber.Ctx) error {
 		Password string `json:"password"`
 	}
 
+	body := SigninBody{}
+	err := c.BodyParser(&body)
+	if err != nil {
+		return err
+	}
+
+	var user models.User
+
+	db.Database.Where("email = ?", body.Email).Find(&user)
+
+	if user.Password != body.Password {
+		return c.SendStatus(fiber.StatusUnauthorized)
+	}
+
 	sess, err := middleware.SessionStorage.Get(c)
 	if err != nil {
 		panic(err)
 	}
 
-	body := SigninBody{}
-	err = c.BodyParser(&body)
-	if err != nil {
-		return err
-	}
-
-	if body.Password != "123456" {
-		return c.SendStatus(fiber.StatusUnauthorized)
-	}
-
-	sess.Set("id", body.Email)
+	sess.Set("id", user.ID)
 	if err := sess.Save(); err != nil {
 		panic(err)
 	}
@@ -60,8 +64,25 @@ func Signin(c *fiber.Ctx) error {
 }
 
 func GetUserInfo(c *fiber.Ctx) error {
-	// TODO
+	sess, err := middleware.SessionStorage.Get(c)
+	if err != nil {
+		panic(err)
+	}
+
+	id := sess.Get("id")
+	if id == nil {
+		return c.JSON(fiber.Map{
+			"user": nil,
+		})
+	}
+
+	var user models.User
+	db.Database.Where("id = ?", id).Find(&user)
+
 	return c.JSON(fiber.Map{
-		"message": "get-user-info",
+		"user": fiber.Map{
+			"email": user.Email,
+			"name":  user.Name,
+		},
 	})
 }
