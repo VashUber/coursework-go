@@ -9,4 +9,5 @@ type User struct {
 	Email    string
 	Password string
 	Profile  Profile `gorm:"constraint:OnDelete:CASCADE;"`
+	// Ticket   Ticket  `gorm:"constraint:OnDelete:CASCADE;"`
 }
