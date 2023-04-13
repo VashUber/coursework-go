@@ -19,6 +19,10 @@ const signout = async () => {
 <template>
   <div class="bg-zinc-900">
     <div class="wrapper flex items-center h-[60px]">
+      <router-link to="/">
+        <img src="/logo.svg" class="h-[50px]" />
+      </router-link>
+
       <div class="flex items-center justify-center gap-2 ml-auto text-white">
         <div
           @click="changeLocale(locale === 'ru' ? 'en' : 'ru')"
