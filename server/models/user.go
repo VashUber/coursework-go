@@ -8,4 +8,5 @@ type User struct {
 	Name     string
 	Email    string
 	Password string
+	Profile  Profile `gorm:"constraint:OnDelete:CASCADE;"`
 }
