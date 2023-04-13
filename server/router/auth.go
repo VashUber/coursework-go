@@ -10,5 +10,6 @@ func DefineAuthRoutes(r fiber.Router) {
 
 	authGroup.Post("/signup", controllers.Signup)
 	authGroup.Post("/signin", controllers.Signin)
+	authGroup.Get("/signout", controllers.Signout)
 	authGroup.Get("/get-user-info", controllers.GetUserInfo)
 }

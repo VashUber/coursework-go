@@ -10,6 +10,8 @@ const onSubmit = async () => {
     email: formData.value.email,
     password: formData.value.password,
   });
+
+  window.location.replace("/");
 };
 
 const formData = ref({
@@ -22,9 +24,11 @@ const formData = ref({
   <AuthLayout @submit="onSubmit">
     <template #form>
       <Input v-model="formData.email"> Email </Input>
-      <Input v-model="formData.password"> Password </Input>
+      <Input v-model="formData.password" type="password"> Password </Input>
 
-      <Button type="submit">Register</Button>
+      <Button type="submit">
+        {{ $t("misc.signin") }}
+      </Button>
     </template>
 
     <template #title>

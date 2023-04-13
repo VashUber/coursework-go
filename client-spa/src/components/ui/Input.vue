@@ -24,6 +24,7 @@ const onChange = (e: Event) => {
       @input="onChange"
       class="min-w-[250px] outline-none px-4 pb-2 pt-4 border-gray-400 border-b rounded-tl-[5px] rounded-tr-[5px] focus:border-blue-700"
       placeholder="placeholder"
+      v-bind="$attrs"
     />
 
     <div

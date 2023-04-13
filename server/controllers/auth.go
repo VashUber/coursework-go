@@ -70,6 +70,16 @@ func Signin(c *fiber.Ctx) error {
 	return c.SendStatus(fiber.StatusOK)
 }
 
+func Signout(c *fiber.Ctx) error {
+	sess, err := middleware.SessionStorage.Get(c)
+	if err != nil {
+		panic(err)
+	}
+
+	sess.Destroy()
+	return c.SendStatus(fiber.StatusOK)
+}
+
 func GetUserInfo(c *fiber.Ctx) error {
 	sess, err := middleware.SessionStorage.Get(c)
 	if err != nil {

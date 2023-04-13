@@ -6,6 +6,11 @@
   },
   "misc": {
     "signin": "Signin",
-    "signup": "Signup"
+    "signup": "Signup",
+    "signout": "Signout"
+  },
+  "nav": {
+    "profile": "Profile",
+    "ticket": "Ticket"
   }
 }
