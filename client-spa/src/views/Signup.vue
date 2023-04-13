@@ -34,7 +34,14 @@ const formData = ref({
       <Input v-model="formData.name"> Name </Input>
       <Input v-model="formData.password" type="password"> Password </Input>
 
-      <Button type="submit">Register</Button>
+      <Button type="submit">
+        {{ $t("page.signup.btn") }}
+      </Button>
+
+      <router-link to="/signin">
+        {{ $t("page.signup.go-to-signin") }}
+        {{ $t("misc.signin") }}
+      </router-link>
     </template>
 
     <template #title>

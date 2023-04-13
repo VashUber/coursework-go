@@ -1,7 +1,9 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div>profile</div>
+  <div>
+    {{ $t("page.names.profile") }}
+  </div>
 </template>
 
 <style scoped></style>

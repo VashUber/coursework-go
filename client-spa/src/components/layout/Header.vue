@@ -20,7 +20,7 @@ const signout = async () => {
   <div class="bg-zinc-900">
     <div class="wrapper flex items-center h-[60px]">
       <router-link to="/">
-        <img src="/logo.svg" class="h-[50px]" />
+        <img src="/logo.svg" class="h-[50px] aspect-[117/50]" />
       </router-link>
 
       <div class="flex items-center justify-center gap-2 ml-auto text-white">
@@ -49,7 +49,7 @@ const signout = async () => {
                   }"
                 >
                   <button @click="close" class="w-full text-left">
-                    {{ $t("nav.profile") }}
+                    {{ $t("page.names.profile") }}
                   </button>
                 </router-link>
               </MenuItem>
@@ -65,7 +65,7 @@ const signout = async () => {
                   }"
                 >
                   <button @click="close" class="w-full text-left">
-                    {{ $t("nav.ticket") }}
+                    {{ $t("page.names.ticket") }}
                   </button>
                 </router-link>
               </MenuItem>

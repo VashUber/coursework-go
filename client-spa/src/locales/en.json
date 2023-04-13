@@ -1,5 +1,4 @@
 {
-  "hello": "hello, {v}",
   "lang": {
     "en": "English",
     "ru": "Russian"
@@ -9,8 +8,18 @@
     "signup": "Signup",
     "signout": "Signout"
   },
-  "nav": {
-    "profile": "Profile",
-    "ticket": "Ticket"
+  "page": {
+    "names": {
+      "profile": "Profile",
+      "ticket": "Ticket"
+    },
+    "signup": {
+      "btn": "Signup",
+      "go-to-signin": "Already have an account?"
+    },
+    "signin": {
+      "btn": "Signin",
+      "go-to-signup": "Does't have an account?"
+    }
   }
 }

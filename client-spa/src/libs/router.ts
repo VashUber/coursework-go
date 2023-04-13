@@ -70,7 +70,5 @@ router.beforeEach((to, from, next) => {
     return next("/");
   }
 
-  console.log(to.meta, user.value);
-
   return next();
 });

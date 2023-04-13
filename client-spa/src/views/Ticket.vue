@@ -1,7 +1,9 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div>ticket</div>
+  <div>
+    {{ $t("page.names.ticket") }}
+  </div>
 </template>
 
 <style scoped></style>

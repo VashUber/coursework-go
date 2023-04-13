@@ -2,9 +2,11 @@
   <div
     class="w-full flex items-center justify-center gap-40 h-[calc(100vh_-_60px)] mx-4"
   >
-    <form class="flex-grow flex flex-col gap-4 items-center" @submit.prevent>
-      <slot name="form" />
-    </form>
+    <div class="flex-grow flex items-center justify-center">
+      <form class="flex flex-col gap-4 items-center" @submit.prevent>
+        <slot name="form" />
+      </form>
+    </div>
     <div
       class="flex-grow aspect-[2/3] overflow-hidden h-[calc(100vh_-_60px)] relative"
     >
