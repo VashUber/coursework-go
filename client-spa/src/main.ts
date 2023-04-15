@@ -4,7 +4,7 @@ import Error from "~/views/Error.vue";
 import { i18n, i18nError, loadLocaleAsync } from "~/libs/i18n";
 import { router } from "~/libs/router";
 import { auth } from "~/services/auth.service";
-import "~/styles/tailwind.scss";
+import "~/styles/index.scss";
 import { useUser } from "./composables/user";
 
 const setup = async () => {

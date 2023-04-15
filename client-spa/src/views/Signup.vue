@@ -1,16 +1,12 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import DatePicker from "@vuepic/vue-datepicker";
-import "@vuepic/vue-datepicker/dist/main.css";
+import DatePicker from "~/components/ui/DatePicker.vue";
 import Input from "~/components/ui/Input.vue";
-import Button from "~/components/ui/Button.vue";
 import AuthLayout from "./components/auth/AuthLayout.vue";
 import { auth } from "~/services/auth.service";
-import { useI18n } from "vue-i18n";
 
 const router = useRouter();
-const { locale } = useI18n();
 
 const onSubmit = async () => {
   await auth.signup({
@@ -38,22 +34,14 @@ const formData = ref({
     <template #form>
       <Input v-model="formData.email"> Email </Input>
       <Input v-model="formData.name"> Name </Input>
-      <date-picker
-        :locale="locale"
-        :enable-time-picker="false"
-        v-model="formData.birthday"
-        placeholder="Birthday"
-        input-class-name="datepicker__input"
-        :max-date="new Date()"
-        vertical
-      />
+      <date-picker v-model="formData.birthday" placeholder="Birthday" />
       <Input v-model="formData.password" type="password"> Password </Input>
 
-      <Button type="submit">
+      <button type="submit" class="button">
         {{ $t("page.signup.btn") }}
-      </Button>
+      </button>
 
-      <router-link to="/signin">
+      <router-link to="/signin" class="text-center">
         {{ $t("page.signup.go-to-signin") }}
         {{ $t("misc.signin") }}
       </router-link>

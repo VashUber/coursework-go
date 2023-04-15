@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import Input from "~/components/ui/Input.vue";
-import Button from "~/components/ui/Button.vue";
 import AuthLayout from "./components/auth/AuthLayout.vue";
 import { auth } from "~/services/auth.service";
 
@@ -26,11 +25,11 @@ const formData = ref({
       <Input v-model="formData.email"> Email </Input>
       <Input v-model="formData.password" type="password"> Password </Input>
 
-      <Button type="submit">
+      <button type="submit" class="button">
         {{ $t("page.signin.btn") }}
-      </Button>
+      </button>
 
-      <router-link to="/signup">
+      <router-link to="/signup" class="text-center">
         {{ $t("page.signin.go-to-signup") }}
         {{ $t("misc.signup") }}
       </router-link>

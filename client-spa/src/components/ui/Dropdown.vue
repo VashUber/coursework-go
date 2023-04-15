@@ -10,7 +10,7 @@ import { Menu, MenuButton, MenuItems } from "@headlessui/vue";
       <slot name="button" />
     </MenuButton>
     <MenuItems
-      class="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-200 rounded-md bg-white shadow-lg focus:outline-none"
+      class="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-200 rounded-md bg-white shadow-lg focus:outline-none z-30"
     >
       <slot name="items" />
     </MenuItems>

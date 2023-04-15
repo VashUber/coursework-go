@@ -1,0 +1,5 @@
+@layer components {
+  .form {
+    @apply flex flex-col gap-4 items-center [&_>_*]:w-full;
+  }
+}

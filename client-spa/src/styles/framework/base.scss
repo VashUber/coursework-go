@@ -1,0 +1,8 @@
+@layer base {
+  h1 {
+    @apply text-2xl py-2;
+  }
+  h2 {
+    @apply text-xl;
+  }
+}

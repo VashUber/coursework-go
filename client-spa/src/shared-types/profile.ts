@@ -1,4 +1,4 @@
-export interface IUserProfile {
-  age: number;
-  avatar: number;
+export interface IProfile {
+  avatar: string;
+  birthday: string;
 }

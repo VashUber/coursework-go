@@ -7,6 +7,8 @@ const Signin = () => import("~/views/Signin.vue");
 const Signup = () => import("~/views/Signup.vue");
 const Profile = () => import("~/views/Profile.vue");
 const Ticket = () => import("~/views/Ticket.vue");
+const Tickets = () => import("~/views/Tickets.vue");
+const Clubs = () => import("~/views/Clubs.vue");
 
 const routes: RouteRecordRaw[] = [
   {
@@ -17,6 +19,16 @@ const routes: RouteRecordRaw[] = [
         path: "/",
         name: "home",
         component: Index,
+      },
+      {
+        path: "/tickets",
+        name: "tickets",
+        component: Tickets,
+      },
+      {
+        path: "/clubs",
+        name: "clubs",
+        component: Clubs,
       },
       {
         path: "/signin",

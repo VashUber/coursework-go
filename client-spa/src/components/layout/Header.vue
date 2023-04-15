@@ -18,10 +18,22 @@ const signout = async () => {
 
 <template>
   <div class="bg-zinc-900">
-    <div class="wrapper flex items-center h-[60px]">
+    <div class="wrapper flex items-center h-[60px] gap-4 text-white">
       <router-link to="/">
         <img src="/logo.svg" class="h-[50px] aspect-[117/50]" />
       </router-link>
+
+      <div
+        class="flex items-center gap-4 bg-zinc-800 h-[36px] py-2 px-4 rounded-md"
+      >
+        <router-link to="/tickets">
+          {{ $t("misc.tickets") }}
+        </router-link>
+
+        <router-link to="/clubs">
+          {{ $t("misc.clubs") }}
+        </router-link>
+      </div>
 
       <div class="flex items-center justify-center gap-2 ml-auto text-white">
         <div

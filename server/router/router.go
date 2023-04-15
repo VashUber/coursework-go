@@ -8,4 +8,5 @@ func InitAllRoutes(app *fiber.App) {
 	apiGroup := app.Group("/api")
 
 	DefineAuthRoutes(apiGroup)
+	DefineProfileRoutes(apiGroup)
 }

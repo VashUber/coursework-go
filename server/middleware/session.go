@@ -19,7 +19,6 @@ func InitSessionStorage() {
 
 func SessionChecker(c *fiber.Ctx) error {
 	sess, err := SessionStorage.Get(c)
-
 	if err != nil {
 		panic(err)
 	}
