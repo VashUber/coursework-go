@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"time"
+
 	"github.com/VashUber/coursework-go/server/db"
 	"github.com/VashUber/coursework-go/server/middleware"
 	"github.com/VashUber/coursework-go/server/models"
@@ -10,10 +12,10 @@ import (
 
 func Signup(c *fiber.Ctx) error {
 	type SignupBody struct {
-		Email    string `json:"email"`
-		Password string `json:"password"`
-		Name     string `json:"name"`
-		Age      uint8  `json:"age"`
+		Email    string    `json:"email"`
+		Password string    `json:"password"`
+		Name     string    `json:"name"`
+		Birthday time.Time `json:"birthday"`
 	}
 
 	body := SignupBody{}
@@ -27,10 +29,15 @@ func Signup(c *fiber.Ctx) error {
 		return c.SendStatus(fiber.StatusBadRequest)
 	}
 
+	profile := models.Profile{
+		Birthday: body.Birthday,
+	}
+
 	db.Database.Create(&models.User{
 		Name:     body.Name,
 		Email:    body.Email,
 		Password: string(password),
+		Profile:  profile,
 	})
 
 	return c.SendStatus(fiber.StatusAccepted)
