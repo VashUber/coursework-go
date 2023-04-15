@@ -64,9 +64,3 @@ const formData = ref({
     </template>
   </AuthLayout>
 </template>
-
-<style lang="scss">
-.datepicker__input {
-  @apply h-[50px] border-gray-400 border-b border-x-0 border-t-0 rounded-tl-[5px] rounded-tr-[5px] rounded-none placeholder:text-gray-400;
-}
-</style>
