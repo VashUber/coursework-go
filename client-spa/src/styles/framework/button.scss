@@ -1,0 +1,9 @@
+@layer components {
+  .button {
+    @apply bg-zinc-900 text-white px-4 py-2 rounded-[5px] hover:bg-zinc-950;
+
+    &--accent {
+      @apply bg-orange-400 hover:bg-orange-500;
+    }
+  }
+}

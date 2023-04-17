@@ -1,0 +1,38 @@
+{
+  "lang": {
+    "en": "English",
+    "ru": "Russian"
+  },
+  "misc": {
+    "signin": "Signin",
+    "signup": "Signup",
+    "signout": "Signout",
+    "tickets": "Tickets",
+    "clubs": "Clubs"
+  },
+  "page": {
+    "names": {
+      "profile": "Profile",
+      "ticket": "Ticket"
+    },
+    "signup": {
+      "btn": "Signup",
+      "go-to-signin": "Already have an account?"
+    },
+    "signin": {
+      "btn": "Signin",
+      "go-to-signup": "Does't have an account?"
+    },
+    "404": {
+      "text": "Page not found!",
+      "link": "go back to the main"
+    }
+  },
+  "components": {
+    "card": {
+      "year": "Year",
+      "cost-per-year": "Per year",
+      "buy": "Buy"
+    }
+  }
+}

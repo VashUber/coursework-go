@@ -1,20 +1,42 @@
 package main
 
 import (
-	"fmt"
+	"log"
+	"os"
 
+	"github.com/VashUber/coursework-go/server/db"
+	"github.com/VashUber/coursework-go/server/middleware"
+	"github.com/VashUber/coursework-go/server/router"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/fiber/v2/middleware/logger"
+	"github.com/joho/godotenv"
 )
 
 func main() {
+	err := godotenv.Load(".env")
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	app := fiber.New()
 
-	api := app.Group("/api")
-	api.Get("/hello", func(c *fiber.Ctx) error {
-		name := c.Query("name", "unknown")
+	middleware.InitSessionStorage()
+	app.Use(cors.New(cors.Config{
+		AllowOrigins:     "http://localhost:4020",
+		AllowCredentials: true,
+	}))
+	app.Use(logger.New())
 
-		return c.SendString(fmt.Sprintf("Hello, %s", name))
-	})
+	router.InitAllRoutes(app)
+	db.CreateConnection()
 
-	app.Listen(":3000")
+	port := os.Getenv("PORT")
+
+	if len(port) == 0 {
+		port = ":3000"
+	}
+
+	app.Listen(port)
 }
