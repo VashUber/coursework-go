@@ -6,20 +6,26 @@ import (
 	"github.com/VashUber/coursework-go/server/db"
 	"github.com/VashUber/coursework-go/server/middleware"
 	"github.com/VashUber/coursework-go/server/models"
+	"github.com/VashUber/coursework-go/server/utils"
 	"github.com/gofiber/fiber/v2"
 	"golang.org/x/crypto/bcrypt"
 )
 
 func Signup(c *fiber.Ctx) error {
 	type SignupBody struct {
-		Email    string    `json:"email"`
-		Password string    `json:"password"`
-		Name     string    `json:"name"`
-		Birthday time.Time `json:"birthday"`
+		Email    string    `json:"email" validate:"required,email"`
+		Password string    `json:"password" validate:"required,min=6"`
+		Name     string    `json:"name" validate:"required"`
+		Birthday time.Time `json:"birthday" validate:"required"`
 	}
 
-	body := SignupBody{}
+	var body SignupBody
 	err := c.BodyParser(&body)
+	if err != nil {
+		return c.SendStatus(fiber.StatusBadRequest)
+	}
+
+	err = utils.ValidateStructInRequest(body, c)
 	if err != nil {
 		return c.SendStatus(fiber.StatusBadRequest)
 	}
@@ -49,7 +55,7 @@ func Signin(c *fiber.Ctx) error {
 		Password string `json:"password"`
 	}
 
-	body := SigninBody{}
+	var body SigninBody
 	err := c.BodyParser(&body)
 	if err != nil {
 		return err
