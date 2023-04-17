@@ -9,6 +9,7 @@ const Profile = () => import("~/views/Profile.vue");
 const Ticket = () => import("~/views/Ticket.vue");
 const Tickets = () => import("~/views/Tickets.vue");
 const Clubs = () => import("~/views/Clubs.vue");
+const Page404 = () => import("~/views/404.vue");
 
 const routes: RouteRecordRaw[] = [
   {
@@ -63,6 +64,15 @@ const routes: RouteRecordRaw[] = [
         },
       },
     ],
+  },
+  {
+    path: "/404",
+    name: "404",
+    component: Page404,
+  },
+  {
+    path: "/:catch(.*)*",
+    redirect: "/404",
   },
 ];
 

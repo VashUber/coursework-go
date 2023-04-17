@@ -22,6 +22,10 @@
     "signin": {
       "btn": "Signin",
       "go-to-signup": "Does't have an account?"
+    },
+    "404": {
+      "text": "Page not found!",
+      "link": "go back to the main"
     }
   },
   "components": {
