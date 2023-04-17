@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import TicketCard from "~/components/misc/TicketCard.vue";
+import TicketPreviewCard from "~/components/misc/TicketPreviewCard.vue";
 
 const mockTickets = [
   {
@@ -29,7 +29,7 @@ const mockTickets = [
 <template>
   <div class="flex min-h-screen justify-center items-center py-10">
     <div class="flex flex-wrap gap-4 justify-center">
-      <ticket-card
+      <ticket-preview-card
         class="hover:-translate-y-6 transition-transform"
         v-for="ticket in mockTickets"
         :key="ticket.id"

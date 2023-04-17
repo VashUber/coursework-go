@@ -28,28 +28,32 @@ onMounted(() => {
       {{ $t("page.names.profile") }}
     </h1>
 
-    <div class="flex gap-4 items-center">
-      <div class="w-40 h-40">
-        <img
-          v-if="userFormData.avatar"
-          class="object-cover w-full h-full rounded-full"
-          :src="userFormData.avatar"
-        />
+    <div class="flex justify-center">
+      <div
+        class="flex gap-8 items-center border border-gray-300 bg-white shadow-lg p-6 rounded-lg"
+      >
+        <div class="w-40 h-40">
+          <img
+            v-if="userFormData.avatar"
+            class="object-cover w-full h-full rounded-full"
+            :src="userFormData.avatar"
+          />
 
-        <div
-          v-else
-          class="bg-orange-400 w-full h-full text-6xl flex items-center justify-center text-white uppercase rounded-full"
-        >
-          {{ userFormData.name[0] }}
+          <div
+            v-else
+            class="bg-orange-400 w-full h-full text-6xl flex items-center justify-center text-white uppercase rounded-full"
+          >
+            {{ userFormData.name[0] }}
+          </div>
         </div>
-      </div>
 
-      <form class="form w-72">
-        <Input v-model="userFormData.email">Email</Input>
-        <Input v-model="userFormData.name">Name</Input>
-        <date-picker v-model="userFormData.birthday" placeholder="Birthday" />
-        <Input v-model="userFormData.password">Password</Input>
-      </form>
+        <form class="form w-72">
+          <Input v-model="userFormData.email">Email</Input>
+          <Input v-model="userFormData.name">Name</Input>
+          <date-picker v-model="userFormData.birthday" placeholder="Birthday" />
+          <Input v-model="userFormData.password">Password</Input>
+        </form>
+      </div>
     </div>
   </div>
 </template>
