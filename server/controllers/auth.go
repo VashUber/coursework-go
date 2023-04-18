@@ -30,7 +30,7 @@ func Signup(c *fiber.Ctx) error {
 		return c.SendStatus(fiber.StatusBadRequest)
 	}
 
-	password, err := bcrypt.GenerateFromPassword([]byte(body.Password), 10)
+	password, err := bcrypt.GenerateFromPassword([]byte(body.Password), 12)
 	if err != nil {
 		return c.SendStatus(fiber.StatusBadRequest)
 	}
@@ -43,7 +43,7 @@ func Signup(c *fiber.Ctx) error {
 		Name:     body.Name,
 		Email:    body.Email,
 		Password: string(password),
-		Profile:  profile,
+		Profile:  &profile,
 	})
 
 	return c.SendStatus(fiber.StatusAccepted)

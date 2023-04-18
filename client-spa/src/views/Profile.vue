@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, ref, unref } from "vue";
 import { useUser } from "~/composables/user";
 import Input from "~/components/ui/Input.vue";
 import { userService } from "~/services/user.service";
@@ -13,6 +13,12 @@ const userFormData = ref({
   password: "",
   avatar: "",
 });
+
+const onSubmit = () => {
+  const body = unref(userFormData);
+
+  userService.updateProfileInfo(body);
+};
 
 onMounted(() => {
   userService.getProfileInfo().then((response) => {
@@ -47,11 +53,13 @@ onMounted(() => {
           </div>
         </div>
 
-        <form class="form w-72">
+        <form class="form w-72" @submit.prevent="onSubmit">
           <Input v-model="userFormData.email">Email</Input>
           <Input v-model="userFormData.name">Name</Input>
           <date-picker v-model="userFormData.birthday" placeholder="Birthday" />
           <Input v-model="userFormData.password">Password</Input>
+
+          <button class="button" type="submit">Change</button>
         </form>
       </div>
     </div>
