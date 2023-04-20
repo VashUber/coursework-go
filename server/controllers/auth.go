@@ -62,10 +62,12 @@ func Signin(c *fiber.Ctx) error {
 	}
 
 	var user models.User
-	db.Database.Where("email = ?", body.Email).Find(&user)
+	err = db.Database.Where("email = ?", body.Email).Find(&user).Error
+	if err != nil {
+		c.SendStatus(fiber.StatusBadRequest)
+	}
 
 	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(body.Password))
-
 	if err != nil {
 		return c.SendStatus(fiber.StatusUnauthorized)
 	}
