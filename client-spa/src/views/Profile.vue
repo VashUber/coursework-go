@@ -57,7 +57,9 @@ onMounted(() => {
           <Input v-model="userFormData.email">Email</Input>
           <Input v-model="userFormData.name">Name</Input>
           <date-picker v-model="userFormData.birthday" placeholder="Birthday" />
-          <Input v-model="userFormData.password">Password</Input>
+          <Input v-model="userFormData.password" type="password">
+            Password
+          </Input>
 
           <button class="button" type="submit">Change</button>
         </form>

@@ -1,29 +1,16 @@
 <script setup lang="ts">
+import { onMounted, ref } from "vue";
+import type { ITicketPreview } from "types/ticket-preview";
 import TicketPreviewCard from "~/components/misc/TicketPreviewCard.vue";
+import { ticketsPreviewService } from "~/services/tickets-preview.service";
 
-const mockTickets = [
-  {
-    id: 1,
-    time: "1",
-    price: 14000,
-    title: "Title",
-    info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
-  },
-  {
-    id: 1,
-    time: "1",
-    price: 14000,
-    title: "Title",
-    info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
-  },
-  {
-    id: 1,
-    time: "1",
-    price: 14000,
-    title: "Title",
-    info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
-  },
-];
+const ticketsPreview = ref<ITicketPreview[]>();
+
+onMounted(() => {
+  ticketsPreviewService.getAllTicketsPreview().then((res) => {
+    ticketsPreview.value = res;
+  });
+});
 </script>
 
 <template>
@@ -31,8 +18,8 @@ const mockTickets = [
     <div class="flex flex-wrap gap-4 justify-center">
       <ticket-preview-card
         class="hover:-translate-y-6 transition-transform"
-        v-for="ticket in mockTickets"
-        :key="ticket.id"
+        v-for="ticket in ticketsPreview"
+        :key="ticket.ID"
         :ticket="ticket"
       />
     </div>

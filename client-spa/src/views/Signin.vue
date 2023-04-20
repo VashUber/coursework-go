@@ -2,10 +2,10 @@
 import { ref } from "vue";
 import Input from "~/components/ui/Input.vue";
 import AuthLayout from "./components/auth/AuthLayout.vue";
-import { auth } from "~/services/auth.service";
+import { authService } from "~/services/auth.service";
 
 const onSubmit = async () => {
-  await auth.signin({
+  await authService.signin({
     email: formData.value.email,
     password: formData.value.password,
   });

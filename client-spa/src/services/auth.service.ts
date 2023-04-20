@@ -1,7 +1,7 @@
 import { $http } from "~/libs/axios";
 import { IUser } from "types/user";
 
-export const auth = {
+export const authService = {
   signin: async (body: { email: string; password: string }) => {
     try {
       return (await $http.post("/api/auth/signin", body)).data;

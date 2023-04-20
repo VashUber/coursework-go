@@ -4,12 +4,12 @@ import { useRouter } from "vue-router";
 import DatePicker from "~/components/ui/DatePicker.vue";
 import Input from "~/components/ui/Input.vue";
 import AuthLayout from "./components/auth/AuthLayout.vue";
-import { auth } from "~/services/auth.service";
+import { authService } from "~/services/auth.service";
 
 const router = useRouter();
 
 const onSubmit = async () => {
-  await auth.signup({
+  await authService.signup({
     email: formData.value.email,
     password: formData.value.password,
     name: formData.value.name,
