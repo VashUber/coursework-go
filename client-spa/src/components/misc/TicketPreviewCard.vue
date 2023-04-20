@@ -18,7 +18,6 @@ const { ticket } = toRefs(props);
     >
       <div class="text-2xl flex flex-col gap-2 items-center p-2">
         {{ ticket.price }}
-        {{ $t("components.card.cost-per-year") }}
         <div class="text-center text-base">
           {{ ticket.info }}
         </div>
@@ -34,13 +33,11 @@ const { ticket } = toRefs(props);
 
       <div>
         {{ ticket.time }}
-
-        {{ $t("components.card.year") }}
       </div>
     </div>
 
     <div class="mt-auto ml-auto">
-      {{ ticket.id }}
+      {{ ticket.ID }}
     </div>
   </div>
 </template>
