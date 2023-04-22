@@ -48,7 +48,7 @@ onMounted(() => {
 
 <template>
   <div class="page">
-    <Thumbs :thumbs="clubs" v-if="!clubsStorage.isLoading" />
+    <Thumbs :thumbs="clubs" to="club" v-if="!clubsStorage.isLoading" />
     <ThumbsLoader :thumbs="6" v-else />
     <Pagination v-if="clubsStorage.pages > 0" :pages="clubsStorage.pages" />
   </div>

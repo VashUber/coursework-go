@@ -33,3 +33,21 @@ func GetClubsPerPage(c *fiber.Ctx) error {
 		"pages": pages,
 	})
 }
+
+func GetClub(c *fiber.Ctx) error {
+	clubID, err := strconv.Atoi(c.Query("id", "1"))
+	if err != nil {
+		return c.SendStatus(fiber.StatusBadRequest)
+	}
+
+	var club models.Club
+	err = db.Database.Preload("ClubAddress").Preload("ClubSchedule").Where("id = ?", clubID).Find(&club).Error
+
+	if err != nil {
+		return c.SendStatus(fiber.StatusBadRequest)
+	}
+
+	return c.JSON(fiber.Map{
+		"club": club,
+	})
+}

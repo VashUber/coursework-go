@@ -29,21 +29,15 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="">
+  <div class="page">
     <h1>
       {{ $t("page.names.profile") }}
     </h1>
 
     <div class="flex justify-center">
-      <div
-        class="flex gap-8 items-center border border-gray-300 bg-white shadow-lg p-6 rounded-lg"
-      >
+      <div class="flex gap-8 items-center border border-gray-300 bg-white shadow-lg p-6 rounded-lg">
         <div class="w-40 h-40">
-          <img
-            v-if="userFormData.avatar"
-            class="object-cover w-full h-full rounded-full"
-            :src="userFormData.avatar"
-          />
+          <img v-if="userFormData.avatar" class="object-cover w-full h-full rounded-full" :src="userFormData.avatar" />
 
           <div
             v-else
@@ -57,9 +51,7 @@ onMounted(() => {
           <Input v-model="userFormData.email">Email</Input>
           <Input v-model="userFormData.name">Name</Input>
           <date-picker v-model="userFormData.birthday" placeholder="Birthday" />
-          <Input v-model="userFormData.password" type="password">
-            Password
-          </Input>
+          <Input v-model="userFormData.password" type="password"> Password </Input>
 
           <button class="button" type="submit">Change</button>
         </form>

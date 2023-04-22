@@ -12,4 +12,14 @@ export const clubsService = {
 
     return data;
   },
+
+  getClubById: async (id: number) => {
+    const data = (
+      await $http.get<{
+        club: IClub;
+      }>(`/api/clubs/get-club?id=${id}`)
+    ).data.club;
+
+    return data;
+  },
 };
