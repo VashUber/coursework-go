@@ -14,7 +14,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="flex min-h-screen justify-center items-center py-10">
+  <div class="page flex justify-center items-center">
     <div class="flex flex-wrap gap-4 justify-center">
       <ticket-preview-card
         class="hover:-translate-y-6 transition-transform"

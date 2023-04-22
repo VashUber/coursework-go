@@ -27,9 +27,13 @@ const routes: RouteRecordRaw[] = [
         component: Tickets,
       },
       {
-        path: "/clubs",
+        path: "/clubs/:page",
         name: "clubs",
         component: Clubs,
+      },
+      {
+        path: "/clubs",
+        redirect: "/clubs/1",
       },
       {
         path: "/signin",
