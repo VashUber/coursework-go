@@ -6,6 +6,6 @@ type ClubAddress struct {
 	gorm.Model
 
 	ClubID uint
-	Street string
-	Home   string
+	Street string `json:"street"`
+	Home   string `json:"home"`
 }

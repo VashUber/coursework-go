@@ -9,6 +9,6 @@ import Head from "./components/meta/Head.vue";
 
 <style>
 body {
-  @apply bg-zinc-200;
+  @apply bg-zinc-100;
 }
 </style>

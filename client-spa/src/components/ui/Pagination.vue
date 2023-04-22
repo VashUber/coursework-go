@@ -56,16 +56,18 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="flex gap-1">
-    <button class="btn" @click="onPagination(currPages[0] - 1)" :disabled="currPages[0] === 1">
-      {{ "<" }}
-    </button>
-    <button v-for="page in currPages" :key="page" class="btn" @click="onPagination(page)">
-      {{ page }}
-    </button>
-    <button class="btn" @click="onPagination(currPages[0] + 1)" :disabled="currPages[currPages.length - 1] === pages">
-      {{ ">" }}
-    </button>
+  <div class="flex items-center justify-center">
+    <div class="flex gap-1">
+      <button class="btn" @click="onPagination(currPages[0] - 1)" :disabled="currPages[0] === 1">
+        {{ "<" }}
+      </button>
+      <button v-for="page in currPages" :key="page" class="btn" @click="onPagination(page)">
+        {{ page }}
+      </button>
+      <button class="btn" @click="onPagination(currPages[0] + 1)" :disabled="currPages[currPages.length - 1] === pages">
+        {{ ">" }}
+      </button>
+    </div>
   </div>
 </template>
 

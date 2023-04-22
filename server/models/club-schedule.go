@@ -14,5 +14,5 @@ type ClubSchedule struct {
 	gorm.Model
 
 	ClubId   uint
-	Schedule pgtype.JSON `gorm:"type:json;default:'[]'"`
+	Schedule pgtype.JSON `gorm:"type:json;default:'[]'" json:"schedule"`
 }
