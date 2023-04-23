@@ -11,4 +11,5 @@ func InitAllRoutes(app *fiber.App) {
 	DefineProfileRoutes(apiGroup)
 	DefineTicketsPreviewRoutes(apiGroup)
 	DefineClubsRoutes(apiGroup)
+	DefineTicketRoutes(apiGroup)
 }

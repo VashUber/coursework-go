@@ -8,10 +8,12 @@ import { useUser } from "~/composables/user";
 import { ticketService } from "~/services/ticket.service";
 import { useNotifications } from "~/composables/notification";
 import { useI18n } from "vue-i18n";
+import { useModal } from "~/composables/modal";
 
 const { user } = useUser();
 const router = useRouter();
 const { t } = useI18n();
+const { setModal } = useModal();
 const ticketsPreview = ref<ITicketPreview[]>();
 const { setNotification } = useNotifications();
 
@@ -33,7 +35,12 @@ const onBuy = async (ticket: number) => {
     return;
   }
 
-  await ticketService.buyTicket(ticket);
+  setModal({
+    type: "BuyTicket",
+    props: {
+      ticket,
+    },
+  });
 };
 </script>
 
