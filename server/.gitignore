@@ -4,6 +4,8 @@
 *.so
 *.dylib
 
+static
+
 *.test
 
 *.out

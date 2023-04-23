@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"database/sql"
 	"time"
 
 	"github.com/VashUber/coursework-go/server/db"
@@ -85,6 +86,36 @@ func UpdateUserInfo(c *fiber.Ctx) error {
 	}
 
 	tx.Commit()
+
+	return c.SendStatus(fiber.StatusOK)
+}
+
+func UploadAvatar(c *fiber.Ctx) error {
+	sess, err := middleware.SessionStorage.Get(c)
+	if err != nil {
+		return c.SendStatus(fiber.StatusInternalServerError)
+	}
+	id := sess.Get("id")
+
+	file, err := c.FormFile("avatar")
+	if err != nil {
+		return c.SendStatus(fiber.StatusBadRequest)
+	}
+	c.SaveFile(file, "./static/avatars/"+file.Filename)
+
+	var user models.User
+	if err := db.Database.Preload("Profile").Where("id = ?", id).First(&user).Error; err != nil {
+		return c.SendStatus(fiber.StatusBadRequest)
+	}
+	user.Profile.Avatar = sql.NullString{
+		String: "http://localhost:4000/static/avatars/" + file.Filename,
+		Valid:  true,
+	}
+
+	err = db.Database.Model(&user.Profile).Updates(user.Profile).Error
+	if err != nil {
+		return c.SendStatus(fiber.StatusInternalServerError)
+	}
 
 	return c.SendStatus(fiber.StatusOK)
 }

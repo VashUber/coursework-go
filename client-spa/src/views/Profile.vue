@@ -4,6 +4,7 @@ import { useUser } from "~/composables/user";
 import Input from "~/components/ui/Input.vue";
 import { userService } from "~/services/user.service";
 import DatePicker from "~/components/ui/DatePicker.vue";
+import Upload from "~/components/icons/Upload.vue";
 
 const { user } = useUser();
 const userFormData = ref({
@@ -20,11 +21,24 @@ const onSubmit = () => {
   userService.updateProfileInfo(body);
 };
 
+const onAvatarUpload = async (e: Event) => {
+  const target = e.target as HTMLInputElement;
+  const file = target.files![0];
+
+  const formData = new FormData();
+  formData.append("avatar", file);
+  await userService.uploadAvatar(formData);
+  await loadProfileInfo();
+};
+
+const loadProfileInfo = async () => {
+  const data = await userService.getProfileInfo();
+  userFormData.value.avatar = data.avatar;
+  userFormData.value.birthday = data.birthday;
+};
+
 onMounted(() => {
-  userService.getProfileInfo().then((response) => {
-    userFormData.value.birthday = response.birthday;
-    userFormData.value.avatar = response.avatar;
-  });
+  loadProfileInfo();
 });
 </script>
 
@@ -36,7 +50,7 @@ onMounted(() => {
 
     <div class="flex justify-center">
       <div class="flex gap-8 items-center border border-gray-300 bg-white shadow-lg p-6 rounded-lg">
-        <div class="w-40 h-40">
+        <div class="w-40 h-40 relative">
           <img v-if="userFormData.avatar" class="object-cover w-full h-full rounded-full" :src="userFormData.avatar" />
 
           <div
@@ -44,6 +58,13 @@ onMounted(() => {
             class="bg-orange-400 w-full h-full text-6xl flex items-center justify-center text-white uppercase rounded-full"
           >
             {{ userFormData.name[0] }}
+          </div>
+
+          <div class="absolute top-2 right-2">
+            <input type="file" id="file" class="hidden" @change="onAvatarUpload" />
+            <label for="file" class="bg-zinc-800 bg-opacity-70 block p-2 rounded-full cursor-pointer">
+              <Upload class="w-6 h-6 fill-white" />
+            </label>
           </div>
         </div>
 

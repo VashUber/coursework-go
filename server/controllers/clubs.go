@@ -41,7 +41,7 @@ func GetClub(c *fiber.Ctx) error {
 	}
 
 	var club models.Club
-	err = db.Database.Preload("ClubAddress").Preload("ClubSchedule").Where("id = ?", clubID).Find(&club).Error
+	err = db.Database.Preload("ClubAddress").Preload("ClubSchedule").Preload("Equipment").Where("id = ?", clubID).Find(&club).Error
 
 	if err != nil {
 		return c.SendStatus(fiber.StatusBadRequest)

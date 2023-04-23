@@ -11,4 +11,5 @@ type Club struct {
 	Name         string        `json:"name"`
 	ClubAddress  *ClubAddress  `gorm:"constraint:OnDelete:CASCADE;" json:"address"`
 	ClubSchedule *ClubSchedule `gorm:"constraint:OnDelete:CASCADE;" json:"schedule"`
+	Equipment    []*Equipment  `gorm:"many2many:club_equipment;" json:"equipment"`
 }
