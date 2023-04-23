@@ -5,14 +5,19 @@ import { ITicketPreview } from "~/shared-types/ticket-preview";
 const props = defineProps<{
   ticket: ITicketPreview;
 }>();
+const emits = defineEmits<{
+  (e: "buy", value: number): void;
+}>();
 
 const { ticket } = toRefs(props);
+
+const handleBuy = (v: number) => {
+  emits("buy", v);
+};
 </script>
 
 <template>
-  <div
-    class="bg-zinc-900 text-orange-400 w-96 h-60 rounded-lg p-4 shadow-md flex flex-col group card relative"
-  >
+  <div class="bg-zinc-900 text-orange-400 w-96 h-60 rounded-lg p-4 shadow-md flex flex-col group card relative">
     <div
       class="group-hover:opacity-100 opacity-0 transition-opacity absolute w-full h-full bg-black bg-opacity-75 top-0 left-0 flex justify-center items-center flex-col gap-4 rounded-lg"
     >
@@ -22,7 +27,7 @@ const { ticket } = toRefs(props);
           {{ ticket.info }}
         </div>
       </div>
-      <button class="button button--accent">
+      <button class="button button--accent" @click="handleBuy(ticket.time)">
         {{ $t("components.card.buy") }}
       </button>
     </div>

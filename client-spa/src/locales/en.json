@@ -34,5 +34,8 @@
       "cost-per-year": "Per year",
       "buy": "Buy"
     }
+  },
+  "notifications": {
+    "signin": "Signin please"
   }
 }

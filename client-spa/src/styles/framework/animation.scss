@@ -1,0 +1,23 @@
+.list {
+  &-move,
+  &-enter-active,
+  &-leave-active {
+    transition: all 0.15s ease;
+  }
+
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+  }
+
+  &-enter-from {
+    transform: translateX(-30px);
+  }
+  &-leave-to {
+    transform: translateX(30px);
+  }
+
+  &-leave-active {
+    position: absolute;
+  }
+}

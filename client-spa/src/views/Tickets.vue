@@ -1,16 +1,40 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
+import { useRouter } from "vue-router";
 import type { ITicketPreview } from "types/ticket-preview";
 import TicketPreviewCard from "~/components/misc/TicketPreviewCard.vue";
 import { ticketsPreviewService } from "~/services/tickets-preview.service";
+import { useUser } from "~/composables/user";
+import { ticketService } from "~/services/ticket.service";
+import { useNotifications } from "~/composables/notification";
+import { useI18n } from "vue-i18n";
 
+const { user } = useUser();
+const router = useRouter();
+const { t } = useI18n();
 const ticketsPreview = ref<ITicketPreview[]>();
+const { setNotification } = useNotifications();
 
 onMounted(() => {
   ticketsPreviewService.getAllTicketsPreview().then((res) => {
     ticketsPreview.value = res;
   });
 });
+
+const onBuy = async (ticket: number) => {
+  if (!user.value) {
+    router.push({
+      name: "signin",
+    });
+    setNotification({
+      message: t("notifications.signin"),
+      success: false,
+    });
+    return;
+  }
+
+  await ticketService.buyTicket(ticket);
+};
 </script>
 
 <template>
@@ -21,6 +45,7 @@ onMounted(() => {
         v-for="ticket in ticketsPreview"
         :key="ticket.ID"
         :ticket="ticket"
+        @buy="onBuy"
       />
     </div>
   </div>

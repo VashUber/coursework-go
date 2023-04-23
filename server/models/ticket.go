@@ -1,9 +1,17 @@
 package models
 
-// type Ticket struct {
-// 	gorm.Model
+import (
+	"time"
 
-// 	UserID      uint
-// 	ExpiredDate time.Time
-// 	Cost        uint
-// }
+	"gorm.io/gorm"
+)
+
+type Ticket struct {
+	gorm.Model
+
+	UserID      uint
+	ClubID      uint
+	Price       uint      `json:"price"`
+	StartDate   time.Time `json:"start_date"`
+	ExpiredDate time.Time `json:"expired_date"`
+}
