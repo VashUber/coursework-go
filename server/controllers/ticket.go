@@ -62,3 +62,41 @@ func BuyTicket(c *fiber.Ctx) error {
 
 	return c.SendStatus(fiber.StatusOK)
 }
+
+func GetUserTicket(c *fiber.Ctx) error {
+	sess, err := middleware.SessionStorage.Get(c)
+	if err != nil {
+		return c.SendStatus(fiber.StatusInternalServerError)
+	}
+	id := sess.Get("id")
+
+	var ticket models.Ticket
+	db.Database.Preload("Club").Preload("Club.ClubAddress", db.Database.Select("ID")).Where("user_id = ?", id).First(&ticket)
+
+	type Address struct {
+		Street string `json:"street"`
+		Home   string `json:"home"`
+	}
+	type Result struct {
+		ID          uint      `json:"id"`
+		Price       uint      `json:"price"`
+		StartDate   time.Time `json:"start_date"`
+		ExpiredDate time.Time `json:"expired_date"`
+		Time        uint      `json:"time"`
+		Address     Address   `json:"address"`
+	}
+
+	return c.JSON(fiber.Map{
+		"ticket": Result{
+			ID:          ticket.ID,
+			Price:       ticket.Price,
+			StartDate:   ticket.StartDate,
+			ExpiredDate: ticket.ExpiredDate,
+			Time:        ticket.Time,
+			Address: Address{
+				Home:   ticket.Club.ClubAddress.Home,
+				Street: ticket.Club.ClubAddress.Street,
+			},
+		},
+	})
+}

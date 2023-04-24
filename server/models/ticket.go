@@ -14,4 +14,6 @@ type Ticket struct {
 	Price       uint      `json:"price"`
 	StartDate   time.Time `json:"start_date"`
 	ExpiredDate time.Time `json:"expired_date"`
+	Time        uint      `json:"time"`
+	Club        *Club     `json:"club"`
 }

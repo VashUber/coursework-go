@@ -35,23 +35,14 @@ func GetClubsPerPage(c *fiber.Ctx) error {
 }
 
 func GetAllClubsLightWeight(c *fiber.Ctx) error {
-	var clubs []models.Club
-	err := db.Database.Select("name", "id").Find(&clubs).Error
-	if err != nil {
-		return c.SendStatus(fiber.StatusInternalServerError)
-	}
-
 	type Result struct {
 		Id   uint   `json:"id"`
 		Name string `json:"name"`
 	}
-
-	res := make([]Result, len(clubs))
-	for i, club := range clubs {
-		res[i] = Result{
-			Id:   club.ID,
-			Name: club.Name,
-		}
+	var res []Result
+	err := db.Database.Model(&models.Club{}).Select("name", "id").Find(&res).Error
+	if err != nil {
+		return c.SendStatus(fiber.StatusInternalServerError)
 	}
 
 	return c.JSON(fiber.Map{

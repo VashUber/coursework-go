@@ -12,5 +12,5 @@ type Club struct {
 	ClubAddress  *ClubAddress  `gorm:"constraint:OnDelete:CASCADE;" json:"address"`
 	ClubSchedule *ClubSchedule `gorm:"constraint:OnDelete:CASCADE;" json:"schedule"`
 	Equipment    []*Equipment  `gorm:"many2many:club_equipment;" json:"equipment"`
-	Ticket       []Ticket      `gorm:"constraint:OnDelete:CASCADE;" json:"tickets"`
+	Ticket       []*Ticket     `gorm:"constraint:OnDelete:CASCADE;" json:"tickets"`
 }
