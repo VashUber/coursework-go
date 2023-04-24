@@ -13,6 +13,6 @@ type Schedule struct {
 type ClubSchedule struct {
 	gorm.Model
 
-	ClubId   uint
+	ClubId   uint        `gorm:"unique"`
 	Schedule pgtype.JSON `gorm:"type:json;default:'[]'" json:"schedule"`
 }
