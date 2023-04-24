@@ -21,7 +21,7 @@ const currComponent = computed(() => {
     <div
       class="fixed w-full h-screen top-0 left-0 bg-black bg-opacity-20 backdrop-blur-sm flex justify-center items-center z-10"
       v-if="currComponent"
-      @click="close"
+      @click.self="close"
     >
       <div class="bg-zinc-800 text-white w-96 min-h-[300px] p-4 rounded-md">
         <Suspense>

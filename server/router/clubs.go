@@ -9,5 +9,6 @@ func DefineClubsRoutes(r fiber.Router) {
 	clubsGroup := r.Group("/clubs")
 
 	clubsGroup.Get("/get-clubs", controllers.GetClubsPerPage)
+	clubsGroup.Get("/get-all-clubs", controllers.GetAllClubsLightWeight)
 	clubsGroup.Get("/get-club", controllers.GetClub)
 }

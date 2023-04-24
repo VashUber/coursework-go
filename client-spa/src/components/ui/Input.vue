@@ -22,14 +22,12 @@ const onChange = (e: Event) => {
     <input
       :value="modelValue"
       @input="onChange"
-      class="min-w-[250px] outline-none px-4 pb-2 pt-4 border-gray-400 border-b rounded-tl-[5px] rounded-tr-[5px] focus:border-blue-700 w-full"
+      class="min-w-[250px] outline-none px-4 pb-2 pt-4 border-gray-400 border-b rounded-tl-[5px] rounded-tr-[5px] focus:border-orange-400 w-full text-gray-950 bg-slate-50"
       placeholder="placeholder"
       v-bind="$attrs"
     />
 
-    <div
-      class="absolute top-1/2 -translate-y-1/2 left-4 text-gray-400 label transition-all"
-    >
+    <div class="absolute top-1/2 -translate-y-1/2 left-4 text-gray-400 label transition-all">
       <slot />
     </div>
   </label>

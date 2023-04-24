@@ -8,7 +8,13 @@
     "signup": "Signup",
     "signout": "Signout",
     "tickets": "Tickets",
-    "clubs": "Clubs"
+    "clubs": "Clubs",
+    "payment": "Payment",
+    "credit-card": {
+      "number": "Card number",
+      "cvc": "cvc/cvv",
+      "expired-date": "Expired date"
+    }
   },
   "page": {
     "names": {

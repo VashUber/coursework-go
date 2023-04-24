@@ -19,7 +19,7 @@ const { locale } = useI18n();
 <style lang="scss">
 .datepicker {
   &__input {
-    @apply h-[50px] border-gray-400 border-b border-x-0 border-t-0 rounded-tl-[5px] rounded-tr-[5px] rounded-none placeholder:text-gray-400;
+    @apply h-[50px] border-gray-400 border-b border-x-0 border-t-0 rounded-tl-[5px] rounded-tr-[5px] rounded-none placeholder:text-gray-400 bg-slate-50;
   }
 }
 </style>

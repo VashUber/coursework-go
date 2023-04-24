@@ -22,4 +22,17 @@ export const clubsService = {
 
     return data;
   },
+
+  getAllClubsLightWeight: async () => {
+    const data = (
+      await $http.get<{
+        clubs: {
+          id: number;
+          name: string;
+        }[];
+      }>(`/api/clubs/get-all-clubs`)
+    ).data.clubs;
+
+    return data;
+  },
 };
