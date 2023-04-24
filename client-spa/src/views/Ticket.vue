@@ -1,4 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { onMounted } from "vue";
+import { ticketService } from "~/services/ticket.service";
+
+onMounted(() => {
+  ticketService.getUserTicket();
+});
+</script>
 
 <template>
   <div class="page">

@@ -1,19 +1,12 @@
 <script setup lang="ts">
 import { toRefs } from "vue";
-import { ITicketPreview } from "types/ticket-preview";
+import { ITicket } from "types/ticket";
 
 const props = defineProps<{
-  ticket: ITicketPreview;
-}>();
-const emits = defineEmits<{
-  (e: "buy", value: number): void;
+  ticket: ITicket;
 }>();
 
 const { ticket } = toRefs(props);
-
-const handleBuy = (v: number) => {
-  emits("buy", v);
-};
 </script>
 
 <template>
@@ -24,25 +17,19 @@ const handleBuy = (v: number) => {
       <div class="text-2xl flex flex-col gap-2 items-center p-2">
         {{ ticket.price }} {{ $t("misc.ruble") }}
         <div class="text-center text-base">
-          {{ ticket.info }}
+          {{ ticket.start_date }}
+          {{ ticket.expired_date }}
         </div>
       </div>
-      <button class="button button--accent" @click="handleBuy(ticket.time)">
-        {{ $t("misc.buy") }}
-      </button>
     </div>
     <div class="text-3xl flex justify-between">
-      <div>
-        {{ ticket.title }}
-      </div>
-
       <div>
         {{ ticket.time }}
       </div>
     </div>
 
     <div class="mt-auto ml-auto">
-      {{ ticket.ID }}
+      {{ ticket. }}
     </div>
   </div>
 </template>

@@ -1,12 +1,15 @@
-export interface IClub {
+export interface IClubSimple {
   ID: number;
-  thumb: string;
-  image: string;
-  info: string;
   name: string;
   address: {
     street: string;
     home: string;
   };
+}
+
+export interface IClub extends IClubSimple {
+  thumb: string;
+  image: string;
+  info: string;
   schedule: string[];
 }
