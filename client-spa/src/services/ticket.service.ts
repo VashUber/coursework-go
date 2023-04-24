@@ -1,3 +1,7 @@
+import { $http } from "~/libs/axios";
+
 export const ticketService = {
-  buyTicket: async (ticket: number) => {},
+  buyTicket: async (body: { ticket: number; club: number }) => {
+    return $http.post("/api/ticket/buy-ticket", body);
+  },
 };

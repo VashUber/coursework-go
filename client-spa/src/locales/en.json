@@ -13,8 +13,11 @@
     "credit-card": {
       "number": "Card number",
       "cvc": "cvc/cvv",
-      "expired-date": "Expired date"
-    }
+      "expired-date": "Expired date",
+      "fill-data": "Please fill fields"
+    },
+    "buy": "Buy",
+    "ruble": "ruble"
   },
   "page": {
     "names": {
@@ -37,8 +40,7 @@
   "components": {
     "card": {
       "year": "Year",
-      "cost-per-year": "Per year",
-      "buy": "Buy"
+      "cost-per-year": "Per year"
     }
   },
   "notifications": {

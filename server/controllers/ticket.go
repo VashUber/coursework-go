@@ -19,6 +19,13 @@ func BuyTicket(c *fiber.Ctx) error {
 		return c.SendStatus(fiber.StatusInternalServerError)
 	}
 
+	var user models.User
+	db.Database.Preload("Ticket").Where("id = ?", id).First(&user)
+
+	if user.Ticket != nil {
+		return fiber.NewError(fiber.StatusBadRequest, "Your already have a ticket")
+	}
+
 	type BuyTicketBody struct {
 		Ticket uint `json:"ticket"`
 		Club   uint `json:"club"`
@@ -26,6 +33,12 @@ func BuyTicket(c *fiber.Ctx) error {
 	var body BuyTicketBody
 	if err := c.BodyParser(&body); err != nil {
 		return c.SendStatus(fiber.StatusBadRequest)
+	}
+
+	var ticketPreview models.TicketPreview
+	err = db.Database.Where("time = ?", body.Ticket).First(&ticketPreview).Error
+	if err != nil {
+		return c.SendStatus(fiber.StatusInternalServerError)
 	}
 
 	start := time.Now()
@@ -42,6 +55,7 @@ func BuyTicket(c *fiber.Ctx) error {
 		UserID:      id,
 		StartDate:   start,
 		ExpiredDate: expired,
+		Price:       ticketPreview.Price,
 	}
 
 	db.Database.Create(ticket)

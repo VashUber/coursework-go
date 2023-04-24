@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute top-4 right-4 flex flex-col gap-4">
+  <div class="absolute top-4 right-4 flex flex-col gap-4 z-50">
     <transition-group name="list">
       <Notification v-for="notify in notifications" :notification="notify" :key="notify.id" />
     </transition-group>

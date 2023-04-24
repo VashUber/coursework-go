@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, defineAsyncComponent } from "vue";
+import { watch, computed, defineAsyncComponent } from "vue";
+import { useRoute } from "vue-router";
 import { useModal } from "~/composables/modal";
 
 const { currModal, close } = useModal();
@@ -14,6 +15,10 @@ const currComponent = computed(() => {
 
   return components[currModal.value.type];
 });
+
+const route = useRoute();
+
+watch(() => route.name, close);
 </script>
 
 <template>

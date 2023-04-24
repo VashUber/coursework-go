@@ -9,7 +9,7 @@ import (
 type Ticket struct {
 	gorm.Model
 
-	UserID      uint
+	UserID      uint `gorm:"unique"`
 	ClubID      uint
 	Price       uint      `json:"price"`
 	StartDate   time.Time `json:"start_date"`

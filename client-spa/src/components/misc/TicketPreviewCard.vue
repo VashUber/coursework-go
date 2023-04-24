@@ -22,13 +22,13 @@ const handleBuy = (v: number) => {
       class="group-hover:opacity-100 opacity-0 transition-opacity absolute w-full h-full bg-black bg-opacity-75 top-0 left-0 flex justify-center items-center flex-col gap-4 rounded-lg"
     >
       <div class="text-2xl flex flex-col gap-2 items-center p-2">
-        {{ ticket.price }}
+        {{ ticket.price }} {{ $t("misc.ruble") }}
         <div class="text-center text-base">
           {{ ticket.info }}
         </div>
       </div>
       <button class="button button--accent" @click="handleBuy(ticket.time)">
-        {{ $t("components.card.buy") }}
+        {{ $t("misc.buy") }}
       </button>
     </div>
     <div class="text-3xl flex justify-between">
