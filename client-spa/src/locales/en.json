@@ -40,6 +40,7 @@
   "components": {
     "card": {
       "year": "Year",
+      "month": "month",
       "cost-per-year": "Per year"
     }
   },

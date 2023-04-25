@@ -56,6 +56,7 @@ func BuyTicket(c *fiber.Ctx) error {
 		StartDate:   start,
 		ExpiredDate: expired,
 		Price:       ticketPreview.Price,
+		Time:        ticketPreview.Time,
 	}
 
 	db.Database.Create(ticket)
@@ -69,6 +70,15 @@ func GetUserTicket(c *fiber.Ctx) error {
 		return c.SendStatus(fiber.StatusInternalServerError)
 	}
 	id := sess.Get("id")
+
+	var user models.User
+	db.Database.Preload("Ticket").Where("id = ?", id).First(&user)
+
+	if user.Ticket == nil {
+		return c.JSON(fiber.Map{
+			"ticket": nil,
+		})
+	}
 
 	var ticket models.Ticket
 	db.Database.Preload("Club").Preload("Club.ClubAddress", db.Database.Select("ID")).Where("user_id = ?", id).First(&ticket)

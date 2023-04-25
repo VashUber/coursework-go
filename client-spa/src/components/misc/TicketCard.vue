@@ -17,19 +17,17 @@ const { ticket } = toRefs(props);
       <div class="text-2xl flex flex-col gap-2 items-center p-2">
         {{ ticket.price }} {{ $t("misc.ruble") }}
         <div class="text-center text-base">
-          {{ ticket.start_date }}
+          {{ ticket.start_date }} -
           {{ ticket.expired_date }}
         </div>
       </div>
     </div>
     <div class="text-3xl flex justify-between">
-      <div>
-        {{ ticket.time }}
-      </div>
+      <div>{{ ticket.time }} {{ ticket.time >= 12 ? $t("components.card.year") : $t("components.card.month") }}</div>
     </div>
 
     <div class="mt-auto ml-auto">
-      {{ ticket. }}
+      {{ ticket.id }}
     </div>
   </div>
 </template>
