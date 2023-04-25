@@ -9,12 +9,7 @@ export const authService = {
       throw e;
     }
   },
-  signup: async (body: {
-    email: string;
-    password: string;
-    name: string;
-    birthday: number;
-  }) => {
+  signup: async (body: { email: string; password: string; name: string; birthday: string }) => {
     try {
       return (await $http.post("/api/auth/signup", body)).data;
     } catch (e) {

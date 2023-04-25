@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import DatePicker from "~/components/ui/DatePicker.vue";
+import dayjs from "dayjs";
 import Input from "~/components/ui/Input.vue";
 import AuthLayout from "./components/auth/AuthLayout.vue";
 import { authService } from "~/services/auth.service";
@@ -9,11 +9,13 @@ import { authService } from "~/services/auth.service";
 const router = useRouter();
 
 const onSubmit = async () => {
+  const [d, m, y] = formData.value.birthday.split(".");
+
   await authService.signup({
     email: formData.value.email,
     password: formData.value.password,
     name: formData.value.name,
-    birthday: formData.value.birthday,
+    birthday: dayjs([m, d, y].join("-")).format(),
   });
 
   router.push({
@@ -25,7 +27,7 @@ const formData = ref({
   email: "",
   password: "",
   name: "",
-  birthday: 0,
+  birthday: "",
 });
 </script>
 
@@ -34,8 +36,8 @@ const formData = ref({
     <template #form>
       <Input v-model="formData.email"> Email </Input>
       <Input v-model="formData.name"> Name </Input>
-      <date-picker v-model="formData.birthday" placeholder="Birthday" />
-      <Input v-model="formData.password" type="password"> Password </Input>
+      <Input v-model="formData.birthday" v-maska data-maska="##.##.####">Birthday</Input>
+      <Input v-model="formData.password" type="password">Password</Input>
 
       <button type="submit" class="button">
         {{ $t("page.signup.btn") }}

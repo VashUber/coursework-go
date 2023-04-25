@@ -3,6 +3,7 @@ import App from "~/App.vue";
 import Error from "~/views/Error.vue";
 import { i18n, i18nError, loadLocaleAsync } from "~/libs/i18n";
 import { router } from "~/libs/router";
+import "~/libs/dayjs";
 import { authService } from "~/services/auth.service";
 import "~/styles/index.scss";
 import { useUser } from "./composables/user";

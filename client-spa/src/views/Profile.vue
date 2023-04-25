@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { onMounted, ref, unref, watch } from "vue";
+import { ref, unref, watch } from "vue";
+import dayjs from "dayjs";
 import { useUser } from "~/composables/user";
 import Input from "~/components/ui/Input.vue";
 import { userService } from "~/services/user.service";
-import DatePicker from "~/components/ui/DatePicker.vue";
 import Upload from "~/components/icons/Upload.vue";
 import { useLoader } from "~/composables/loader";
 
@@ -21,7 +21,12 @@ const userFormData = ref({
 const onSubmit = () => {
   const body = unref(userFormData);
 
-  userService.updateProfileInfo(body);
+  const [d, m, y] = body.birthday.split(".");
+
+  userService.updateProfileInfo({
+    ...body,
+    birthday: dayjs([m, d, y].join("-")).format(),
+  });
 };
 
 const onAvatarUpload = async (e: Event) => {
@@ -38,7 +43,7 @@ watch(data, (user) => {
   if (!user) return;
 
   userFormData.value.avatar = user.avatar;
-  userFormData.value.birthday = user.birthday;
+  userFormData.value.birthday = dayjs(user.birthday).format("DD.MM.YYYY");
 });
 </script>
 
@@ -71,7 +76,7 @@ watch(data, (user) => {
         <form class="form w-72" @submit.prevent="onSubmit">
           <Input v-model="userFormData.email">Email</Input>
           <Input v-model="userFormData.name">Name</Input>
-          <date-picker v-model="userFormData.birthday" placeholder="Birthday" />
+          <Input v-model="userFormData.birthday" v-maska data-maska="##.##.####">Birthday</Input>
           <Input v-model="userFormData.password" type="password"> Password </Input>
 
           <button class="button" type="submit">Change</button>
