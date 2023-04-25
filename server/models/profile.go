@@ -10,7 +10,7 @@ import (
 type Profile struct {
 	gorm.Model
 
-	UserID   uint
+	UserID   uint `gorm:"unique"`
 	Avatar   sql.NullString
 	Birthday time.Time
 }

@@ -1,7 +1,31 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { computed } from "vue";
+import { useRoute } from "vue-router";
+import { clubsService } from "~/services/clubs.service";
+import Pagination from "~/components/ui/Pagination.vue";
+import Thumbs from "~/components/misc/Thumbs.vue";
+import ThumbsLoader from "~/components/misc/ThumbsLoader.vue";
+import { useLoader } from "~/composables/loader";
+
+const route = useRoute();
+const page = computed(() => +route.params.page || 1);
+const { data } = useLoader(clubsService.getClubsPerPage, page);
+
+const clubs = computed(() => {
+  if (!data.value?.clubs) return;
+
+  return data.value.clubs.map((club) => ({
+    id: club.ID,
+    thumb: club.thumb,
+    title: club.name,
+  }));
+});
+</script>
 
 <template>
-  <div></div>
+  <div class="page">
+    <Thumbs :thumbs="clubs" to="club" v-if="clubs" />
+    <ThumbsLoader :thumbs="6" v-else />
+    <Pagination v-if="data?.pages" :pages="data.pages" />
+  </div>
 </template>
-
-<style scoped></style>

@@ -10,4 +10,6 @@ func DefineProfileRoutes(r fiber.Router) {
 	userGroup := r.Group("/user")
 
 	userGroup.Get("/get-profile-info", middleware.SessionChecker, controllers.GetProfileInfo)
+	userGroup.Post("/update-profile-info", middleware.SessionChecker, controllers.UpdateUserInfo)
+	userGroup.Post("/upload-avatar", middleware.SessionChecker, controllers.UploadAvatar)
 }

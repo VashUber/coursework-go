@@ -9,6 +9,7 @@ const Profile = () => import("~/views/Profile.vue");
 const Ticket = () => import("~/views/Ticket.vue");
 const Tickets = () => import("~/views/Tickets.vue");
 const Clubs = () => import("~/views/Clubs.vue");
+const Club = () => import("~/views/Club.vue");
 const Page404 = () => import("~/views/404.vue");
 
 const routes: RouteRecordRaw[] = [
@@ -27,9 +28,22 @@ const routes: RouteRecordRaw[] = [
         component: Tickets,
       },
       {
-        path: "/clubs",
+        path: "/clubs/:page",
         name: "clubs",
         component: Clubs,
+      },
+      {
+        path: "/clubs",
+        redirect: "/clubs/1",
+      },
+      {
+        path: "/club/:id",
+        name: "club",
+        component: Club,
+      },
+      {
+        path: "/club",
+        redirect: "/",
       },
       {
         path: "/signin",

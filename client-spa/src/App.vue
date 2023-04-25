@@ -1,14 +1,18 @@
 <script setup lang="ts">
-import Head from "./components/meta/Head.vue";
+import Head from "~/components/meta/Head.vue";
+import Notifications from "./components/misc/Notifications.vue";
+import Modal from "./components/modal/Modal.vue";
 </script>
 
 <template>
   <Head />
+  <Modal />
+  <Notifications />
   <router-view />
 </template>
 
-<style>
+<style lang="scss">
 body {
-  @apply bg-zinc-200;
+  @apply bg-zinc-100;
 }
 </style>

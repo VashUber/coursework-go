@@ -3,9 +3,11 @@ import App from "~/App.vue";
 import Error from "~/views/Error.vue";
 import { i18n, i18nError, loadLocaleAsync } from "~/libs/i18n";
 import { router } from "~/libs/router";
-import { auth } from "~/services/auth.service";
+import "~/libs/dayjs";
+import { authService } from "~/services/auth.service";
 import "~/styles/index.scss";
 import { useUser } from "./composables/user";
+import { vMaska } from "maska";
 
 const setup = async () => {
   const { setUser } = useUser();
@@ -13,10 +15,7 @@ const setup = async () => {
   try {
     const app = createApp(App);
 
-    const [_, user] = await Promise.all([
-      loadLocaleAsync(),
-      auth.getUserInfo(),
-    ]);
+    const [_, user] = await Promise.all([loadLocaleAsync(), authService.getUserInfo()]);
 
     if (user) {
       setUser(user);
@@ -24,6 +23,7 @@ const setup = async () => {
 
     app.use(router);
     app.use(i18n);
+    app.directive("maska", vMaska);
     app.mount("#app");
   } catch (e) {
     console.log(e);

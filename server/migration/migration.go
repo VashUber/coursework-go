@@ -19,5 +19,5 @@ func main() {
 }
 
 func RunAutoMigration() {
-	db.Database.AutoMigrate(&models.User{}, &models.Profile{})
+	db.Database.AutoMigrate(&models.User{}, &models.Profile{}, &models.Club{}, &models.ClubAddress{}, &models.ClubSchedule{}, &models.Equipment{}, &models.TicketPreview{}, &models.Ticket{}, &models.Trainer{})
 }

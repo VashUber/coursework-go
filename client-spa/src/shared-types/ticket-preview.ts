@@ -1,7 +1,7 @@
 export interface ITicketPreview {
-  id: number;
+  ID: number;
   title: string;
   price: number;
-  time: string;
+  time: number;
   info: string;
 }

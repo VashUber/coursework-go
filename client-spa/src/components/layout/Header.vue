@@ -4,13 +4,13 @@ import { useUser } from "~/composables/user";
 import Dropdown from "~/components/ui/Dropdown.vue";
 import { MenuItem } from "@headlessui/vue";
 import { changeLocale } from "~/libs/i18n";
-import { auth } from "~/services/auth.service";
+import { authService } from "~/services/auth.service";
 
 const { user } = useUser();
 const { locale } = useI18n();
 
 const signout = async () => {
-  await auth.signout();
+  await authService.signout();
 
   window.location.replace("/");
 };

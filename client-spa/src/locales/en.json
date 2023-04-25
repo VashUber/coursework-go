@@ -8,7 +8,16 @@
     "signup": "Signup",
     "signout": "Signout",
     "tickets": "Tickets",
-    "clubs": "Clubs"
+    "clubs": "Clubs",
+    "payment": "Payment",
+    "credit-card": {
+      "number": "Card number",
+      "cvc": "cvc/cvv",
+      "expired-date": "Expired date",
+      "fill-data": "Please fill fields"
+    },
+    "buy": "Buy",
+    "ruble": "ruble"
   },
   "page": {
     "names": {
@@ -31,8 +40,12 @@
   "components": {
     "card": {
       "year": "Year",
+      "month": "month",
       "cost-per-year": "Per year",
-      "buy": "Buy"
+      "empty": "Empty"
     }
+  },
+  "notifications": {
+    "signin": "Signin please"
   }
 }
