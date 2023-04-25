@@ -23,23 +23,22 @@ const signout = async () => {
         <img src="/logo.svg" class="h-[50px] aspect-[117/50]" />
       </router-link>
 
-      <div
-        class="flex items-center gap-4 bg-zinc-800 h-[36px] py-2 px-4 rounded-md"
-      >
+      <div class="flex items-center gap-4 bg-zinc-800 h-[36px] py-2 px-4 rounded-md">
         <router-link to="/tickets">
           {{ $t("misc.tickets") }}
         </router-link>
 
-        <router-link to="/clubs">
+        <router-link to="/clubs/1">
           {{ $t("misc.clubs") }}
+        </router-link>
+
+        <router-link to="/trainers/1">
+          {{ $t("misc.trainers") }}
         </router-link>
       </div>
 
       <div class="flex items-center justify-center gap-2 ml-auto text-white">
-        <div
-          @click="changeLocale(locale === 'ru' ? 'en' : 'ru')"
-          class="cursor-pointer"
-        >
+        <div @click="changeLocale(locale === 'ru' ? 'en' : 'ru')" class="cursor-pointer">
           {{ $t("lang." + (locale === "ru" ? "en" : "ru")) }}
         </div>
 
