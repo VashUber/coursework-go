@@ -1,12 +1,15 @@
 <script setup lang="ts">
-import { onMounted, ref, unref } from "vue";
+import { onMounted, ref, unref, watch } from "vue";
 import { useUser } from "~/composables/user";
 import Input from "~/components/ui/Input.vue";
 import { userService } from "~/services/user.service";
 import DatePicker from "~/components/ui/DatePicker.vue";
 import Upload from "~/components/icons/Upload.vue";
+import { useLoader } from "~/composables/loader";
 
 const { user } = useUser();
+const { data, refetch } = useLoader(userService.getProfileInfo);
+
 const userFormData = ref({
   email: user.value!.email,
   name: user.value!.name,
@@ -28,17 +31,14 @@ const onAvatarUpload = async (e: Event) => {
   const formData = new FormData();
   formData.append("avatar", file);
   await userService.uploadAvatar(formData);
-  await loadProfileInfo();
+  await refetch();
 };
 
-const loadProfileInfo = async () => {
-  const data = await userService.getProfileInfo();
-  userFormData.value.avatar = data.avatar;
-  userFormData.value.birthday = data.birthday;
-};
+watch(data, (user) => {
+  if (!user) return;
 
-onMounted(() => {
-  loadProfileInfo();
+  userFormData.value.avatar = user.avatar;
+  userFormData.value.birthday = user.birthday;
 });
 </script>
 

@@ -1,57 +1,31 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, watch } from "vue";
+import { computed } from "vue";
 import { useRoute } from "vue-router";
 import { clubsService } from "~/services/clubs.service";
 import Pagination from "~/components/ui/Pagination.vue";
 import Thumbs from "~/components/misc/Thumbs.vue";
 import ThumbsLoader from "~/components/misc/ThumbsLoader.vue";
-import { IClub } from "~/shared-types/club";
+import { useLoader } from "~/composables/loader";
 
 const route = useRoute();
-const clubsStorage = ref<{
-  clubs: IClub[];
-  pages: number;
-  isLoading: boolean;
-}>({
-  clubs: [],
-  pages: 0,
-  isLoading: false,
-});
-
-const setClubsPerPage = async (page: number) => {
-  clubsStorage.value.isLoading = true;
-  const data = await clubsService.getClubsPerPage(page);
-  clubsStorage.value = { ...data, isLoading: false };
-};
+const page = computed(() => +route.params.page || 1);
+const { data } = useLoader(clubsService.getClubsPerPage, page);
 
 const clubs = computed(() => {
-  return clubsStorage.value.clubs.map((club) => ({
+  if (!data.value?.clubs) return;
+
+  return data.value.clubs.map((club) => ({
     id: club.ID,
     thumb: club.thumb,
     title: club.name,
   }));
 });
-
-watch(
-  () => route.params,
-  (params) => {
-    const page = +params.page || 1;
-    setClubsPerPage(page);
-  }
-);
-
-onMounted(() => {
-  const page = +route.params.page || 1;
-  setClubsPerPage(page);
-});
 </script>
 
 <template>
   <div class="page">
-    <Thumbs :thumbs="clubs" to="club" v-if="!clubsStorage.isLoading" />
+    <Thumbs :thumbs="clubs" to="club" v-if="clubs" />
     <ThumbsLoader :thumbs="6" v-else />
-    <Pagination v-if="clubsStorage.pages > 0" :pages="clubsStorage.pages" />
+    <Pagination v-if="data?.pages" :pages="data.pages" />
   </div>
 </template>
-
-<style scoped></style>

@@ -1,28 +1,19 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
 import { ticketService } from "~/services/ticket.service";
+import { useLoader } from "~/composables/loader";
 import TicketCard from "~/components/misc/TicketCard.vue";
-import { ITicket } from "types/ticket";
 
-const ticket = ref<ITicket>();
-
-const setTicket = async () => {
-  const response = await ticketService.getUserTicket();
-  if (!response) return;
-
-  ticket.value = response;
-};
-
-onMounted(() => {
-  setTicket();
-});
+const { data, isLoading } = useLoader(ticketService.getUserTicket);
 </script>
 
 <template>
   <div class="page">
     {{ $t("page.names.ticket") }}
     <div class="py-2 flex items-center justify-center">
-      <ticket-card :ticket="ticket" v-if="ticket"></ticket-card>
+      <ticket-card :ticket="data" v-if="data"></ticket-card>
+      <div v-else-if="!isLoading">
+        {{ $t("components.card.empty") }}
+      </div>
     </div>
   </div>
 </template>

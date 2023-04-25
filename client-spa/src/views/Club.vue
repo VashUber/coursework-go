@@ -1,21 +1,13 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { computed } from "vue";
 import { useRoute } from "vue-router";
 import { clubsService } from "~/services/clubs.service";
-import { IClub } from "~/shared-types/club";
+import { useLoader } from "~/composables/loader";
 
 const route = useRoute();
 
-const club = ref<IClub>();
-
-const setClubById = async (id: number) => {
-  club.value = await clubsService.getClubById(id);
-};
-
-onMounted(() => {
-  const clubId = +route.params.id || -1;
-  setClubById(clubId);
-});
+const clubId = computed(() => +route.params.id || -1);
+const { data: club } = useLoader(clubsService.getClubById, clubId);
 </script>
 
 <template>
