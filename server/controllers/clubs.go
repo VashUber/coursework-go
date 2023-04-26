@@ -13,16 +13,17 @@ func GetClubsPerPage(c *fiber.Ctx) error {
 	if err != nil {
 		return c.SendStatus(fiber.StatusBadRequest)
 	}
-
 	if page <= 0 {
 		page = 1
 	}
 
+	search := c.Query("search", "")
+
 	var clubs []models.Club
 	var count int64
 	offset := (page - 1) * perPage
-	db.Database.Preload("ClubAddress").Preload("ClubSchedule").Offset(offset).Limit(perPage).Find(&clubs)
-	db.Database.Table("clubs").Count(&count)
+	db.Database.Preload("ClubAddress").Preload("ClubSchedule").Where("name LIKE ?", search+"%").Offset(offset).Limit(perPage).Find(&clubs)
+	db.Database.Table("clubs").Where("name LIKE ?", search+"%").Count(&count)
 
 	pages := (count + perPage - 1) / perPage
 
