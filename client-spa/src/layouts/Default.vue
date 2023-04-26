@@ -5,8 +5,6 @@ import MobileMenu from "~/components/layout/MobileMenu.vue";
 </script>
 
 <template>
-  <Head />
-
   <Header />
   <MobileMenu />
 

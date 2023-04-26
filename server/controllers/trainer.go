@@ -17,18 +17,26 @@ func GetTrainersPerPage(c *fiber.Ctx) error {
 	}
 
 	search := c.Query("search", "")
+	experience, err := strconv.Atoi(c.Query("experience", "0"))
+	if err != nil {
+		return c.SendStatus(fiber.StatusBadRequest)
+	}
 
 	type Result struct {
-		Id    uint   `json:"id"`
-		Name  string `json:"name"`
-		Thumb string `json:"thumb"`
+		Id         uint   `json:"id"`
+		Name       string `json:"name"`
+		Thumb      string `json:"thumb"`
+		Experience uint   `json:"experience"`
 	}
 
 	var trainers []Result
 	var count int64
 	offset := (page - 1) * perPage
-	db.Database.Table("trainers").Where("name LIKE ?", search+"%").Offset(offset).Limit(perPage).Find(&trainers)
-	db.Database.Table("trainers").Where("name LIKE ?", search+"%").Count(&count)
+
+	query := db.Database.Table("trainers").Where("name LIKE ?", search+"%").Where("experience > ?", experience)
+
+	query.Offset(offset).Limit(perPage).Find(&trainers)
+	query.Count(&count)
 
 	pages := (count + perPage - 1) / perPage
 
