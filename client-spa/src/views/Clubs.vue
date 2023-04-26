@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed } from "vue";
 import { useRoute } from "vue-router";
 import { clubsService } from "~/services/clubs.service";
 import Pagination from "~/components/ui/Pagination.vue";
@@ -9,6 +9,7 @@ import ThumbsLoader from "~/components/misc/ThumbsLoader.vue";
 import { useLoader } from "~/composables/loader";
 
 const route = useRoute();
+
 const page = computed(() => +route.params.page || 1);
 const searchQ = computed(() => route.query.search || "");
 const { data } = useLoader(clubsService.getClubsPerPage, page, searchQ);

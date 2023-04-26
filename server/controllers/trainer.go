@@ -13,16 +13,17 @@ func GetTrainersPerPage(c *fiber.Ctx) error {
 	if err != nil {
 		return c.SendStatus(fiber.StatusBadRequest)
 	}
-
 	if page <= 0 {
 		page = 1
 	}
 
+	search := c.Query("search", "")
+
 	var trainers []models.Trainer
 	var count int64
 	offset := (page - 1) * perPage
-	db.Database.Offset(offset).Limit(perPage).Find(&trainers)
-	db.Database.Table("trainers").Count(&count)
+	db.Database.Where("name LIKE ?", search+"%").Offset(offset).Limit(perPage).Find(&trainers)
+	db.Database.Table("trainers").Where("name LIKE ?", search+"%").Count(&count)
 
 	pages := (count + perPage - 1) / perPage
 
