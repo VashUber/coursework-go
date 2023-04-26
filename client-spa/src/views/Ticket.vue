@@ -9,7 +9,7 @@ const { data, isLoading } = useLoader(ticketService.getUserTicket);
 <template>
   <div class="page">
     {{ $t("page.names.ticket") }}
-    <div class="flex flex-wrap gap-4 justify-center items-center h-full">
+    <div class="flex flex-wrap gap-4 justify-center items-center min-h-[calc(100vh_-_120px)]">
       <ticket-card :ticket="data" v-if="data"></ticket-card>
       <div v-else-if="!isLoading">
         {{ $t("components.card.empty") }}

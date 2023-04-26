@@ -3,6 +3,7 @@ import { watch } from "vue";
 import { useRoute } from "vue-router";
 import { useMenu } from "~/composables/menu";
 import { useSize } from "~/composables/size";
+import LangToggler from "../misc/LangToggler.vue";
 
 const route = useRoute();
 
@@ -34,6 +35,8 @@ watch(
         <router-link to="/trainers/1" class="hover:bg-zinc-800 p-2 rounded-md">
           {{ $t("misc.trainers") }}
         </router-link>
+
+        <LangToggler class="hover:bg-zinc-800 p-2 rounded-md" />
       </div>
     </div>
   </transition>

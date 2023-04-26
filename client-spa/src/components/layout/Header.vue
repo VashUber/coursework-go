@@ -1,16 +1,14 @@
 <script setup lang="ts">
-import { useI18n } from "vue-i18n";
 import { useUser } from "~/composables/user";
 import { useSize } from "~/composables/size";
+import LangToggler from "../misc/LangToggler.vue";
 import Dropdown from "~/components/ui/Dropdown.vue";
 import { MenuItem } from "@headlessui/vue";
-import { changeLocale } from "~/libs/i18n";
 import { authService } from "~/services/auth.service";
 import MenuClosed from "~/components/icons/MenuClosed.vue";
 import MenuOpen from "~/components/icons/MenuOpen.vue";
 import { useMenu } from "~/composables/menu";
 
-const { locale } = useI18n();
 const { size } = useSize();
 const { user } = useUser();
 const { isOpen, toggle } = useMenu();
@@ -44,9 +42,7 @@ const signout = async () => {
       </div>
 
       <div class="flex items-center justify-center gap-4 ml-auto text-white">
-        <div @click="changeLocale(locale === 'ru' ? 'en' : 'ru')" class="cursor-pointer" v-if="!size.isMd">
-          {{ $t("lang." + (locale === "ru" ? "en" : "ru")) }}
-        </div>
+        <LangToggler v-if="!size.isMd" />
 
         <Dropdown v-if="user">
           <template #button>
