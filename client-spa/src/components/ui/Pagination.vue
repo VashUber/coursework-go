@@ -33,6 +33,7 @@ const onPagination = (page: number) => {
   if (page < 1 || page > pages.value) return;
 
   router.push({
+    ...route,
     params: {
       page,
     },
