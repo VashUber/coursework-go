@@ -5,7 +5,6 @@ import type { ITicketPreview } from "types/ticket-preview";
 import TicketPreviewCard from "~/components/misc/TicketPreviewCard.vue";
 import { ticketsPreviewService } from "~/services/tickets-preview.service";
 import { useUser } from "~/composables/user";
-import { ticketService } from "~/services/ticket.service";
 import { useNotifications } from "~/composables/notification";
 import { useI18n } from "vue-i18n";
 import { useModal } from "~/composables/modal";
@@ -45,15 +44,9 @@ const onBuy = async (ticket: number) => {
 </script>
 
 <template>
-  <div class="page flex justify-center items-center">
-    <div class="flex flex-wrap gap-4 justify-center">
-      <ticket-preview-card
-        class="hover:-translate-y-6 transition-transform"
-        v-for="ticket in ticketsPreview"
-        :key="ticket.ID"
-        :ticket="ticket"
-        @buy="onBuy"
-      />
+  <div class="page">
+    <div class="flex flex-wrap gap-4 justify-center items-center h-full">
+      <ticket-preview-card v-for="ticket in ticketsPreview" :key="ticket.ID" :ticket="ticket" @buy="onBuy" />
     </div>
   </div>
 </template>

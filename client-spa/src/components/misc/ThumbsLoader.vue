@@ -4,7 +4,7 @@ import { toRefs } from "vue";
 const props = withDefaults(
   defineProps<{
     thumbs: number;
-    isVertical: boolean;
+    isVertical?: boolean;
   }>(),
   {
     isVertical: false,
@@ -25,10 +25,10 @@ const { thumbs, isVertical } = toRefs(props);
 
 <style scoped lang="scss">
 .vertical {
-  @apply lg:grid-cols-6 md:grid-cols-3 grid-cols-1;
+  @apply lg:grid-cols-6 sm:grid-cols-3 min-[480px]:grid-cols-2 grid-cols-1;
 }
 
 .horizontal {
-  @apply lg:grid-cols-3 md:grid-cols-2 grid-cols-1;
+  @apply lg:grid-cols-3 grid-cols-2;
 }
 </style>
