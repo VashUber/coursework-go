@@ -1,33 +1,28 @@
 <script setup lang="ts">
-import { ref, toRefs } from "vue";
-import { useRouter } from "vue-router";
+import { onMounted, ref, watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import Search from "../icons/Search.vue";
 
 const router = useRouter();
-
-const props = defineProps<{
-  modelValue: string;
-}>();
-const { modelValue } = toRefs(props);
-const emits = defineEmits<{
-  (e: "update:modelValue", value: string): void;
-}>();
+const route = useRoute();
+const search = ref("");
 const isFocused = ref(false);
 let timeoutId: NodeJS.Timeout;
 
-const onInput = (e: Event) => {
+watch(search, () => {
   clearTimeout(timeoutId);
-  const value = (e.target as HTMLInputElement).value;
 
-  emits("update:modelValue", value);
   timeoutId = setTimeout(() => {
     router.push({
       query: {
-        search: value,
+        search: search.value,
       },
     });
   }, 400);
-};
+});
+onMounted(() => {
+  search.value = String(route.query.search || "");
+});
 </script>
 
 <template>
@@ -39,12 +34,11 @@ const onInput = (e: Event) => {
   >
     <input
       type="text"
-      @input="onInput"
+      v-model="search"
       @focus="isFocused = true"
       @blur="isFocused = false"
-      :value="modelValue"
       class="outline-none bg-slate-50"
-      placeholder="Search"
+      :placeholder="$t('misc.search')"
     />
     <Search class="text-gray-400" />
   </div>

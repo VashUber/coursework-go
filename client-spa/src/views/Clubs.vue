@@ -13,8 +13,6 @@ const page = computed(() => +route.params.page || 1);
 const searchQ = computed(() => route.query.search || "");
 const { data } = useLoader(clubsService.getClubsPerPage, page, searchQ);
 
-const search = ref("");
-
 const clubs = computed(() => {
   if (!data.value?.clubs) return;
 
@@ -29,7 +27,7 @@ const clubs = computed(() => {
 <template>
   <div class="page">
     <div class="flex items-center justify-center">
-      <Search v-model="search" />
+      <Search />
     </div>
 
     <Thumbs :thumbs="clubs" to="club" v-if="clubs" />
