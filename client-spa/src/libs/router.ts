@@ -11,7 +11,6 @@ const Tickets = () => import("~/views/Tickets.vue");
 const Clubs = () => import("~/views/Clubs.vue");
 const Club = () => import("~/views/Club.vue");
 const Trainers = () => import("~/views/Trainers.vue");
-const Trainer = () => import("~/views/Trainer.vue");
 const Page404 = () => import("~/views/404.vue");
 
 const routes: RouteRecordRaw[] = [
@@ -55,11 +54,6 @@ const routes: RouteRecordRaw[] = [
       {
         path: "/trainers",
         redirect: "/clubs/1",
-      },
-      {
-        path: "/trainer/:id",
-        name: "trainer",
-        component: Trainer,
       },
       {
         path: "/signin",

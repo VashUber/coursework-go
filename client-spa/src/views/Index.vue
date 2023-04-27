@@ -19,21 +19,24 @@ const carouselSlides = [
 </script>
 
 <template>
-  <div class="-mx-4">
-    <div class="bg-black bg-opacity-60 absolute w-full h-[calc(100vh_-_70px)] top-[60px] z-50">
-      <div class="flex h-full flex-col justify-center items-center text-white">
-        <h1 class="text-3xl">
-          {{ $t("page.index.h1") }}
-        </h1>
-        <router-link to="/tickets">
-          <button class="button button--accent">{{ $t("misc.buy") }} {{ $t("misc.ticket") }}</button>
-        </router-link>
-      </div>
-    </div>
-    <carousel :wrap-around="true" :autoplay="4000" class="aspect-video">
+  <div class="-mx-4 page p-0">
+    <carousel :wrap-around="true" :autoplay="4000" class="aspect-video relative">
       <slide v-for="slide in carouselSlides" :key="slide.alt">
         <img :src="slide.src" :alt="slide.alt" class="w-full aspect-video" />
       </slide>
+
+      <template #addons>
+        <div class="bg-black bg-opacity-60 absolute w-full top-0 h-full z-20">
+          <div class="flex h-full flex-col justify-center items-center text-white">
+            <h1 class="text-3xl">
+              {{ $t("page.index.h1") }}
+            </h1>
+            <router-link to="/tickets">
+              <button class="button button--accent">{{ $t("misc.buy") }} {{ $t("misc.ticket") }}</button>
+            </router-link>
+          </div>
+        </div>
+      </template>
     </carousel>
   </div>
 </template>

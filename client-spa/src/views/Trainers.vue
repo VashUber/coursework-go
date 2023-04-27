@@ -47,7 +47,7 @@ const filters = ref({
       <Filters :filters="filters" />
     </div>
 
-    <Thumbs :thumbs="trainers" to="trainer" v-if="trainers" :is-vertical="true" />
+    <Thumbs :thumbs="trainers" v-if="trainers" :is-vertical="true" />
     <ThumbsLoader :thumbs="6" v-else :is-vertical="true" />
     <Pagination v-if="data?.pages" :pages="data.pages" />
   </div>

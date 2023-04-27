@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { toRefs } from "vue";
+import { computed, toRefs } from "vue";
 
 const props = withDefaults(
   defineProps<{
@@ -8,7 +8,7 @@ const props = withDefaults(
       title: string;
       id: number;
     }[];
-    to: string;
+    to?: string;
     isVertical?: boolean;
   }>(),
   {
@@ -17,11 +17,17 @@ const props = withDefaults(
 );
 
 const { thumbs, to, isVertical } = toRefs(props);
+
+const component = computed(() => {
+  if (to?.value) return "router-link";
+
+  return "div";
+});
 </script>
 
 <template>
   <div class="grid gap-4 py-2" :class="[isVertical ? 'vertical' : 'horizontal']">
-    <router-link v-for="thumb in thumbs" :key="thumb.id" :to="`/${to}/${thumb.id}`">
+    <component :is="component" v-for="thumb in thumbs" :key="thumb.id" :to="to ? `/${to}/${thumb.id}` : null">
       <div class="flex flex-col gap-2">
         <div class="relative bg-slate-200" :class="[isVertical ? 'aspect-[9/16]' : 'aspect-video']">
           <img :src="thumb.thumb" class="absolute top-0 left-0 w-full h-full rounded-md object-cover" />
@@ -30,7 +36,7 @@ const { thumbs, to, isVertical } = toRefs(props);
           {{ thumb.title }}
         </h2>
       </div>
-    </router-link>
+    </component>
   </div>
 </template>
 
