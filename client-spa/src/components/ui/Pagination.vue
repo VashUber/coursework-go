@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref, toRefs } from "vue";
+import { onMounted, ref, toRefs, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 const props = defineProps<{
@@ -33,6 +33,7 @@ const onPagination = (page: number) => {
   if (page < 1 || page > pages.value) return;
 
   router.push({
+    ...route,
     params: {
       page,
     },
@@ -43,7 +44,7 @@ const onPagination = (page: number) => {
   currPages.value = getNewPagesArray(page);
 };
 
-onMounted(() => {
+const init = () => {
   const pageFromRoute = route.params.page ? +route.params.page : 1;
 
   currPages.value =
@@ -52,7 +53,10 @@ onMounted(() => {
           .fill(0)
           .map((_, idx) => idx + 1)
       : getNewPagesArray(pageFromRoute);
-});
+};
+
+onMounted(init);
+watch(pages, init);
 </script>
 
 <template>

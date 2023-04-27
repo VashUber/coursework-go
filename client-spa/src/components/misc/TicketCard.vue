@@ -10,7 +10,9 @@ const { ticket } = toRefs(props);
 </script>
 
 <template>
-  <div class="bg-zinc-900 text-orange-400 w-96 h-60 rounded-lg p-4 shadow-md flex flex-col group card relative">
+  <div
+    class="bg-zinc-900 text-orange-400 w-96 h-60 rounded-lg p-4 shadow-md flex flex-col group card relative hover:-translate-y-6 transition-transform"
+  >
     <div
       class="group-hover:opacity-100 opacity-0 transition-opacity absolute w-full h-full bg-black bg-opacity-75 top-0 left-0 flex justify-center items-center flex-col gap-4 rounded-lg"
     >

@@ -9,7 +9,9 @@
     "signout": "Signout",
     "tickets": "Tickets",
     "clubs": "Clubs",
+    "trainers": "Trainers",
     "payment": "Payment",
+    "equipment": "Equipment",
     "credit-card": {
       "number": "Card number",
       "cvc": "cvc/cvv",
@@ -17,7 +19,8 @@
       "fill-data": "Please fill fields"
     },
     "buy": "Buy",
-    "ruble": "ruble"
+    "ruble": "ruble",
+    "search": "Search..."
   },
   "page": {
     "names": {

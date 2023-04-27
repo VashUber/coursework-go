@@ -54,7 +54,9 @@ watch(data, (user) => {
     </h1>
 
     <div class="flex justify-center">
-      <div class="flex gap-8 items-center border border-gray-300 bg-white shadow-lg p-6 rounded-lg">
+      <div
+        class="flex gap-8 items-center justify-center border border-gray-300 bg-white shadow-lg p-6 rounded-lg max-[640px]:flex-wrap"
+      >
         <div class="w-40 h-40 relative">
           <img v-if="userFormData.avatar" class="object-cover w-full h-full rounded-full" :src="userFormData.avatar" />
 

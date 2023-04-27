@@ -8,4 +8,5 @@ type ClubAddress struct {
 	ClubID uint   `gorm:"unique"`
 	Street string `json:"street"`
 	Home   string `json:"home"`
+	Subway string `json:"subway"`
 }

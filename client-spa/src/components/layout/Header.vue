@@ -1,13 +1,17 @@
 <script setup lang="ts">
-import { useI18n } from "vue-i18n";
 import { useUser } from "~/composables/user";
+import { useSize } from "~/composables/size";
+import LangToggler from "../misc/LangToggler.vue";
 import Dropdown from "~/components/ui/Dropdown.vue";
 import { MenuItem } from "@headlessui/vue";
-import { changeLocale } from "~/libs/i18n";
 import { authService } from "~/services/auth.service";
+import MenuClosed from "~/components/icons/MenuClosed.vue";
+import MenuOpen from "~/components/icons/MenuOpen.vue";
+import { useMenu } from "~/composables/menu";
 
+const { size } = useSize();
 const { user } = useUser();
-const { locale } = useI18n();
+const { isOpen, toggle } = useMenu();
 
 const signout = async () => {
   await authService.signout();
@@ -23,25 +27,22 @@ const signout = async () => {
         <img src="/logo.svg" class="h-[50px] aspect-[117/50]" />
       </router-link>
 
-      <div
-        class="flex items-center gap-4 bg-zinc-800 h-[36px] py-2 px-4 rounded-md"
-      >
+      <div class="flex items-center gap-4 bg-zinc-800 h-[36px] py-2 px-4 rounded-md" v-if="!size.isMd">
         <router-link to="/tickets">
           {{ $t("misc.tickets") }}
         </router-link>
 
-        <router-link to="/clubs">
+        <router-link to="/clubs/1">
           {{ $t("misc.clubs") }}
+        </router-link>
+
+        <router-link to="/trainers/1">
+          {{ $t("misc.trainers") }}
         </router-link>
       </div>
 
-      <div class="flex items-center justify-center gap-2 ml-auto text-white">
-        <div
-          @click="changeLocale(locale === 'ru' ? 'en' : 'ru')"
-          class="cursor-pointer"
-        >
-          {{ $t("lang." + (locale === "ru" ? "en" : "ru")) }}
-        </div>
+      <div class="flex items-center justify-center gap-4 ml-auto text-white">
+        <LangToggler v-if="!size.isMd" />
 
         <Dropdown v-if="user">
           <template #button>
@@ -102,6 +103,11 @@ const signout = async () => {
         <router-link to="/signin" v-else>
           {{ $t("misc.signin") }}
         </router-link>
+
+        <button class="button button--second" v-if="size.isMd" @click="toggle">
+          <MenuClosed v-if="!isOpen" />
+          <MenuOpen v-else />
+        </button>
       </div>
     </div>
   </div>

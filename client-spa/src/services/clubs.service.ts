@@ -2,12 +2,12 @@ import { IClub } from "types/club";
 import { $http } from "~/libs/axios";
 
 export const clubsService = {
-  getClubsPerPage: async (page: number) => {
+  getClubsPerPage: async (page: number, search: string, subway: string) => {
     const data = (
       await $http.get<{
         clubs: IClub[];
         pages: number;
-      }>(`/api/clubs/get-clubs?page=${page}`)
+      }>(`/api/clubs/get-clubs?page=${page}&search=${search}&subway=${subway}`)
     ).data;
 
     return data;
@@ -32,6 +32,16 @@ export const clubsService = {
         }[];
       }>(`/api/clubs/get-all-clubs`)
     ).data.clubs;
+
+    return data;
+  },
+
+  getAllSubwayStations: async () => {
+    const data = (
+      await $http.get<{
+        subways: { id: number; subway: string }[];
+      }>("/api/clubs/get-subway-stations")
+    ).data.subways;
 
     return data;
   },

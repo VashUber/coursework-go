@@ -4,7 +4,6 @@ import (
 	"strconv"
 
 	"github.com/VashUber/coursework-go/server/db"
-	"github.com/VashUber/coursework-go/server/models"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -13,16 +12,31 @@ func GetTrainersPerPage(c *fiber.Ctx) error {
 	if err != nil {
 		return c.SendStatus(fiber.StatusBadRequest)
 	}
-
 	if page <= 0 {
 		page = 1
 	}
 
-	var trainers []models.Trainer
+	search := c.Query("search", "")
+	experience, err := strconv.Atoi(c.Query("experience", "0"))
+	if err != nil {
+		return c.SendStatus(fiber.StatusBadRequest)
+	}
+
+	type Result struct {
+		Id         uint   `json:"id"`
+		Name       string `json:"name"`
+		Thumb      string `json:"thumb"`
+		Experience uint   `json:"experience"`
+	}
+
+	var trainers []Result
 	var count int64
 	offset := (page - 1) * perPage
-	db.Database.Offset(offset).Limit(perPage).Find(&trainers)
-	db.Database.Table("trainers").Count(&count)
+
+	query := db.Database.Table("trainers").Where("name LIKE ?", search+"%").Where("experience > ?", experience)
+
+	query.Offset(offset).Limit(perPage).Find(&trainers)
+	query.Count(&count)
 
 	pages := (count + perPage - 1) / perPage
 
