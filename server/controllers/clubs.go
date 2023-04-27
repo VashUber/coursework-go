@@ -18,12 +18,20 @@ func GetClubsPerPage(c *fiber.Ctx) error {
 	}
 
 	search := c.Query("search", "")
+	subway := c.Query("subway", "")
 
 	var clubs []models.Club
 	var count int64
 	offset := (page - 1) * perPage
-	db.Database.Preload("ClubAddress").Preload("ClubSchedule").Where("name LIKE ?", search+"%").Offset(offset).Limit(perPage).Find(&clubs)
-	db.Database.Table("clubs").Where("name LIKE ?", search+"%").Count(&count)
+
+	query := db.Database.Joins("ClubAddress").Where("name LIKE ?", search+"%")
+
+	if len(subway) != 0 {
+		query.Where("subway = ?", subway)
+	}
+
+	query.Offset(offset).Limit(perPage).Find(&clubs)
+	query.Find(&clubs).Count(&count)
 
 	pages := (count + perPage - 1) / perPage
 
@@ -64,5 +72,23 @@ func GetClub(c *fiber.Ctx) error {
 
 	return c.JSON(fiber.Map{
 		"club": club,
+	})
+}
+
+func GetAllSubwayStations(c *fiber.Ctx) error {
+	type Result struct {
+		ID     uint   `json:"id"`
+		Subway string `json:"subway"`
+	}
+
+	var subwayStations []Result
+	err := db.Database.Model(&models.ClubAddress{}).Distinct("subway").Find(&subwayStations).Error
+
+	if err != nil {
+		c.SendStatus(fiber.StatusInternalServerError)
+	}
+
+	return c.JSON(fiber.Map{
+		"subways": subwayStations,
 	})
 }

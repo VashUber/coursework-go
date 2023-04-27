@@ -2,17 +2,11 @@
 import { ref, toRefs } from "vue";
 import Select from "../ui/Select.vue";
 import Filter from "../icons/Filter.vue";
-import { TOption } from "types/select";
 import { useRoute, useRouter } from "vue-router";
+import { TFilters } from "~/shared-types/filters";
 
 const props = defineProps<{
-  filters: Record<
-    string,
-    {
-      options: TOption[];
-      model: TOption;
-    }
-  >;
+  filters: TFilters;
 }>();
 
 const router = useRouter();
