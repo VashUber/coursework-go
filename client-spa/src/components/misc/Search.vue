@@ -38,9 +38,16 @@ onMounted(() => {
       v-model="search"
       @focus="isFocused = true"
       @blur="isFocused = false"
-      class="outline-none bg-slate-50 w-full"
+      class="outline-none bg-slate-50 w-full border-none h-full search"
       :placeholder="$t('misc.search')"
     />
     <Search class="text-gray-400" />
   </div>
 </template>
+
+<style scoped lang="scss">
+.search {
+  box-shadow: none;
+  padding: 0;
+}
+</style>

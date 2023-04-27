@@ -22,8 +22,8 @@ const formData = ref({
 <template>
   <AuthLayout @submit="onSubmit">
     <template #form>
-      <Input v-model="formData.email"> Email </Input>
-      <Input v-model="formData.password" type="password"> Password </Input>
+      <Input v-model="formData.email"> {{ $t("misc.email") }} </Input>
+      <Input v-model="formData.password" type="password"> {{ $t("misc.password") }} </Input>
 
       <button type="submit" class="button">
         {{ $t("page.signin.btn") }}
@@ -31,7 +31,7 @@ const formData = ref({
 
       <router-link to="/signup" class="text-center">
         {{ $t("page.signin.go-to-signup") }}
-        {{ $t("misc.signup") }}
+        {{ $t("page.signup.btn") }}
       </router-link>
     </template>
 

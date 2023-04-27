@@ -6,7 +6,26 @@
   "misc": {
     "signin": "Вход",
     "signup": "Регистрация",
-    "signout": "Выйти"
+    "signout": "Выйти",
+    "tickets": "Абонементы",
+    "ticket": "Абонемент",
+    "clubs": "Клубы",
+    "trainers": "Тренеры",
+    "payment": "Оплата",
+    "equipment": "Оборудование",
+    "birthday": "День рождения",
+    "name": "Имя",
+    "email": "Почта",
+    "password": "Пароль",
+    "credit-card": {
+      "number": "Номер карты",
+      "cvc": "cvc/cvv",
+      "expired-date": "Дата окончание",
+      "fill-data": "Пожалуйста, заполните поля"
+    },
+    "buy": "Купить",
+    "ruble": "рублей",
+    "search": "Поиск..."
   },
   "page": {
     "names": {
@@ -15,11 +34,26 @@
     },
     "signup": {
       "btn": "Зарегистрироваться",
-      "go-to-signin": "У вас уже есть аккаунт?"
+      "go-to-signin": "Уже есть аккаунт?"
     },
     "signin": {
       "btn": "Войти",
-      "go-to-signup": "У вас еще нет аккаунта?"
+      "go-to-signup": "Еще нет аккаунта?"
+    },
+    "404": {
+      "text": "Страница не найдена!",
+      "link": "вернуться на главную"
     }
+  },
+  "components": {
+    "card": {
+      "year": "Год",
+      "month": "Месяц",
+      "cost-per-year": "За год",
+      "empty": "Пусто"
+    }
+  },
+  "notifications": {
+    "signin": "Войдите, пожалуйста"
   }
 }
