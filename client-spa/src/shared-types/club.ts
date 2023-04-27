@@ -5,6 +5,7 @@ export interface IClubSimple {
   address: {
     street: string;
     home: string;
+    subway: string;
   };
 }
 
