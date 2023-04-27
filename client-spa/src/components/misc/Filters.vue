@@ -31,22 +31,18 @@ const setFilter = (filter: string, value: any) => {
 </script>
 
 <template>
-  <div class="relative">
+  <div class="relative" v-click-outside="close">
     <button class="button ml-auto" @click="toggle">
       <Filter></Filter>
     </button>
 
-    <div
-      v-if="isVisible"
-      class="absolute top-[102%] right-[50%] bg-zinc-900 text-white z-10 p-4 rounded-md"
-      v-click-outside="close"
-    >
+    <div v-if="isVisible" class="absolute top-[102%] right-[50%] bg-zinc-900 text-white z-10 p-4 rounded-md">
       <Select
         v-for="(filter, key) in filters"
         :key="key"
         v-model="filter.model"
         :options="filter.options"
-        @click="setFilter(key, filter.model.value)"
+        @click="setFilter(key, filter.model.value), close()"
       />
     </div>
   </div>

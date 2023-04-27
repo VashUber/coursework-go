@@ -14,8 +14,8 @@ watch(search, () => {
 
   timeoutId = setTimeout(() => {
     router.push({
-      ...route.query,
       query: {
+        ...route.query,
         search: search.value,
       },
     });

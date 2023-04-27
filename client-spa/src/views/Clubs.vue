@@ -41,7 +41,7 @@ onMounted(() => {
       value: elem.subway,
     }));
 
-    filters.value.subway.options = [...filters.value.subway.options, ...data];
+    filters.value.subway.options = [...data, ...filters.value.subway.options];
   });
 });
 </script>
