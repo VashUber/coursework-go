@@ -1,14 +1,29 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, watch } from "vue";
 import { useRoute } from "vue-router";
 import { clubsService } from "~/services/clubs.service";
 import { useLoader } from "~/composables/loader";
 import Equipment from "~/components/misc/Equipment.vue";
+import { useMeta } from "~/composables/meta";
+import { useI18n } from "vue-i18n";
 
 const route = useRoute();
 
 const clubId = computed(() => +route.params.id || -1);
 const { data: club } = useLoader(clubsService.getClubById, clubId);
+
+const { setHead } = useMeta();
+const { t } = useI18n();
+watch(club, (value) => {
+  if (!value) return;
+
+  setHead({
+    title: t("page.club.title", {
+      v: value.name,
+    }),
+    description: t("page.club.description", { v: value.name }),
+  });
+});
 </script>
 
 <template>

@@ -8,6 +8,7 @@ import { useUser } from "~/composables/user";
 import { useNotifications } from "~/composables/notification";
 import { useI18n } from "vue-i18n";
 import { useModal } from "~/composables/modal";
+import { useMeta } from "~/composables/meta";
 
 const { user } = useUser();
 const router = useRouter();
@@ -41,6 +42,12 @@ const onBuy = async (ticket: number) => {
     },
   });
 };
+
+const { setHead } = useMeta();
+setHead({
+  title: t("page.tickets.title"),
+  description: t("page.tickets.description"),
+});
 </script>
 
 <template>

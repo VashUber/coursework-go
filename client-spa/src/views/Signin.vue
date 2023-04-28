@@ -3,6 +3,8 @@ import { ref } from "vue";
 import Input from "~/components/ui/Input.vue";
 import AuthLayout from "./components/auth/AuthLayout.vue";
 import { authService } from "~/services/auth.service";
+import { useMeta } from "~/composables/meta";
+import { useI18n } from "vue-i18n";
 
 const onSubmit = async () => {
   await authService.signin({
@@ -16,6 +18,13 @@ const onSubmit = async () => {
 const formData = ref({
   email: "",
   password: "",
+});
+
+const { setHead } = useMeta();
+const { t } = useI18n();
+setHead({
+  title: t("page.signin.title"),
+  description: t("page.index.description"),
 });
 </script>
 

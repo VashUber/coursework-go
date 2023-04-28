@@ -9,6 +9,8 @@ import Filters from "~/components/misc/Filters.vue";
 import ThumbsLoader from "~/components/misc/ThumbsLoader.vue";
 import { useLoader } from "~/composables/loader";
 import { TFilters } from "types/filters";
+import { useMeta } from "~/composables/meta";
+import { useI18n } from "vue-i18n";
 
 const route = useRoute();
 
@@ -32,6 +34,13 @@ const filters = ref<TFilters>({
     options: [{ label: "Not selected", value: null }],
     model: { label: "Not selected", value: null },
   },
+});
+
+const { setHead } = useMeta();
+const { t } = useI18n();
+setHead({
+  title: t("page.clubs.title"),
+  description: t("page.clubs.description"),
 });
 
 onMounted(() => {

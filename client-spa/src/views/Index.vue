@@ -1,6 +1,15 @@
 <script setup lang="ts">
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide } from "vue3-carousel";
+import { useMeta } from "~/composables/meta";
+import { useI18n } from "vue-i18n";
+
+const { setHead } = useMeta();
+const { t } = useI18n();
+setHead({
+  title: t("page.index.title"),
+  description: t("page.index.description"),
+});
 
 const carouselSlides = [
   {

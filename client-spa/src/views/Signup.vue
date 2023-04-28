@@ -5,6 +5,8 @@ import dayjs from "dayjs";
 import Input from "~/components/ui/Input.vue";
 import AuthLayout from "./components/auth/AuthLayout.vue";
 import { authService } from "~/services/auth.service";
+import { useMeta } from "~/composables/meta";
+import { useI18n } from "vue-i18n";
 
 const router = useRouter();
 
@@ -28,6 +30,13 @@ const formData = ref({
   password: "",
   name: "",
   birthday: "",
+});
+
+const { setHead } = useMeta();
+const { t } = useI18n();
+setHead({
+  title: t("page.signup.title"),
+  description: t("page.index.description"),
 });
 </script>
 
