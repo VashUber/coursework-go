@@ -32,7 +32,7 @@ const component = computed(() => {
         <div class="relative bg-slate-200" :class="[isVertical ? 'aspect-[9/16]' : 'aspect-video']">
           <img :src="thumb.thumb" class="absolute top-0 left-0 w-full h-full rounded-md object-cover" />
         </div>
-        <h2 class="h-6">
+        <h2 class="h-6 overflow-hidden whitespace-nowrap text-ellipsis">
           {{ thumb.title }}
         </h2>
       </div>
