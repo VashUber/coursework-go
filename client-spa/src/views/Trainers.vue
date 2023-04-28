@@ -8,6 +8,8 @@ import ThumbsLoader from "~/components/misc/ThumbsLoader.vue";
 import Search from "~/components/misc/Search.vue";
 import Filters from "~/components/misc/Filters.vue";
 import { trainersService } from "~/services/trainers.service";
+import { useMeta } from "~/composables/meta";
+import { useI18n } from "vue-i18n";
 
 const route = useRoute();
 
@@ -24,6 +26,13 @@ const trainers = computed(() => {
     thumb: trainer.thumb,
     title: trainer.name,
   }));
+});
+
+const { setHead } = useMeta();
+const { t } = useI18n();
+setHead({
+  title: t("page.trainers.title"),
+  description: t("page.trainers.description"),
 });
 
 const filters = ref({
@@ -47,7 +56,7 @@ const filters = ref({
       <Filters :filters="filters" />
     </div>
 
-    <Thumbs :thumbs="trainers" to="trainer" v-if="trainers" :is-vertical="true" />
+    <Thumbs :thumbs="trainers" v-if="trainers" :is-vertical="true" />
     <ThumbsLoader :thumbs="6" v-else :is-vertical="true" />
     <Pagination v-if="data?.pages" :pages="data.pages" />
   </div>

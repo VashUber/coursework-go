@@ -33,10 +33,8 @@ func GetTrainersPerPage(c *fiber.Ctx) error {
 	var count int64
 	offset := (page - 1) * perPage
 
-	query := db.Database.Table("trainers").Where("name LIKE ?", search+"%").Where("experience > ?", experience)
-
-	query.Offset(offset).Limit(perPage).Find(&trainers)
-	query.Count(&count)
+	db.Database.Table("trainers").Where("name LIKE ?", search+"%").Where("experience > ?", experience).Offset(offset).Limit(perPage).Find(&trainers)
+	db.Database.Table("trainers").Where("name LIKE ?", search+"%").Where("experience > ?", experience).Count(&count)
 
 	pages := (count + perPage - 1) / perPage
 

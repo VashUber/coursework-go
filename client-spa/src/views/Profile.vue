@@ -6,6 +6,8 @@ import Input from "~/components/ui/Input.vue";
 import { userService } from "~/services/user.service";
 import Upload from "~/components/icons/Upload.vue";
 import { useLoader } from "~/composables/loader";
+import { useI18n } from "vue-i18n";
+import { useMeta } from "~/composables/meta";
 
 const { user } = useUser();
 const { data, refetch } = useLoader(userService.getProfileInfo);
@@ -38,6 +40,13 @@ const onAvatarUpload = async (e: Event) => {
   await userService.uploadAvatar(formData);
   await refetch();
 };
+
+const { setHead } = useMeta();
+const { t } = useI18n();
+setHead({
+  title: t("page.profile.title", { v: user.value?.name }),
+  description: t("page.profile.description", { v: user.value?.name }),
+});
 
 watch(data, (user) => {
   if (!user) return;

@@ -1,4 +1,14 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useI18n } from "vue-i18n";
+import { useMeta } from "~/composables/meta";
+
+const { setHead } = useMeta();
+const { t } = useI18n();
+setHead({
+  title: t("page.404.title"),
+  description: t("page.index.description"),
+});
+</script>
 
 <template>
   <div class="h-screen flex flex-col items-center justify-center">

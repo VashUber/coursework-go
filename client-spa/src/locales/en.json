@@ -8,10 +8,15 @@
     "signup": "Signup",
     "signout": "Signout",
     "tickets": "Tickets",
+    "ticket": "Ticket",
     "clubs": "Clubs",
     "trainers": "Trainers",
     "payment": "Payment",
     "equipment": "Equipment",
+    "email": "Email",
+    "password": "Password",
+    "birthday": "Birthday",
+    "name": "Name",
     "credit-card": {
       "number": "Card number",
       "cvc": "cvc/cvv",
@@ -27,17 +32,49 @@
       "profile": "Profile",
       "ticket": "Ticket"
     },
+    "index": {
+      "h1": "Fitness club Dungeon",
+      "title": "Dungeon - fitness club",
+      "description": "Best fitness club in Moscow"
+    },
     "signup": {
       "btn": "Signup",
+      "title": "Dungeon - signup",
       "go-to-signin": "Already have an account?"
     },
     "signin": {
       "btn": "Signin",
-      "go-to-signup": "Does't have an account?"
+      "title": "Dungeon - signin",
+      "go-to-signup": "Don't have an account yet?"
     },
     "404": {
       "text": "Page not found!",
-      "link": "go back to the main"
+      "link": "go back to the main",
+      "title": "Page not found!"
+    },
+    "club": {
+      "title": "Fitness club {v}",
+      "description": "{v}"
+    },
+    "clubs": {
+      "title": "Fitness clubs",
+      "description": "Best fitness club in Moscow"
+    },
+    "trainers": {
+      "title": "Trainers",
+      "description": "Best trainers in Moscow"
+    },
+    "tickets": {
+      "title": "Dungeon tickets",
+      "description": "Dungeon tickets"
+    },
+    "profile": {
+      "title": "{v} - profile",
+      "description": "User {v} profile"
+    },
+    "ticket": {
+      "title": "{v} - ticket",
+      "description": "User {v} ticket"
     }
   },
   "components": {

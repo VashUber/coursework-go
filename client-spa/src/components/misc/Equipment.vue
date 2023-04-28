@@ -9,7 +9,7 @@ const { equipment } = toRefs(props);
 </script>
 
 <template>
-  <div class="flex flex-col gap-2">
+  <div class="flex flex-col gap-2 w-40">
     <div class="aspect-square bg-slate-200 relative">
       <img :src="equipment.image" class="absolute left-0 top-0 w-full h-full" />
     </div>
