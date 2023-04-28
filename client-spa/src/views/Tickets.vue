@@ -44,8 +44,8 @@ const onBuy = async (ticket: number) => {
 </script>
 
 <template>
-  <div class="page">
-    <div class="flex flex-wrap gap-4 justify-center items-center min-h-[calc(100vh_-_120px)]">
+  <div class="page flex justify-center items-center">
+    <div class="flex flex-wrap gap-4 justify-center items-center">
       <ticket-preview-card v-for="ticket in ticketsPreview" :key="ticket.ID" :ticket="ticket" @buy="onBuy" />
     </div>
   </div>
