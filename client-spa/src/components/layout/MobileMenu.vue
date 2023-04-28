@@ -19,7 +19,7 @@ watch(
 <template>
   <transition name="fade">
     <div
-      class="fixed top-[60px] left-0 w-full flex justify-end bg-black bg-opacity-20 backdrop-blur-sm z-20 h-[calc(100vh_-_60px)]"
+      class="fixed top-[60px] left-0 w-full flex justify-end bg-black bg-opacity-20 backdrop-blur-sm z-30 h-[calc(100vh_-_60px)]"
       v-if="size.isMd && isOpen"
       @click.self="setMenu(false)"
     >

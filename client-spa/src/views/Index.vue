@@ -26,7 +26,7 @@ const carouselSlides = [
       </slide>
 
       <template #addons>
-        <div class="bg-black bg-opacity-60 absolute w-full top-0 h-full z-20">
+        <div class="bg-black bg-opacity-60 absolute w-full top-0 h-full z-10">
           <div class="flex h-full flex-col justify-center items-center text-white">
             <h1 class="text-3xl">
               {{ $t("page.index.h1") }}

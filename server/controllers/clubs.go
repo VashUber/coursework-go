@@ -24,14 +24,8 @@ func GetClubsPerPage(c *fiber.Ctx) error {
 	var count int64
 	offset := (page - 1) * perPage
 
-	query := db.Database.Joins("ClubAddress").Where("name LIKE ?", search+"%")
-
-	if len(subway) != 0 {
-		query.Where("subway = ?", subway)
-	}
-
-	query.Offset(offset).Limit(perPage).Find(&clubs)
-	query.Find(&clubs).Count(&count)
+	db.Database.Table("clubs").Joins("ClubAddress").Where("name LIKE ?", search+"%").Where("subway LIKE ?", subway+"%").Offset(offset).Limit(perPage).Find(&clubs)
+	db.Database.Table("clubs").Joins("ClubAddress").Where("name LIKE ?", search+"%").Where("subway LIKE ?", subway+"%").Find(&[]models.Club{}).Count(&count)
 
 	pages := (count + perPage - 1) / perPage
 
