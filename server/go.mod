@@ -7,6 +7,7 @@ require (
 	github.com/gofiber/fiber/v2 v2.43.0
 	github.com/jackc/pgx v3.6.2+incompatible
 	github.com/joho/godotenv v1.5.1
+	github.com/robfig/cron/v3 v3.0.0
 	golang.org/x/crypto v0.7.0
 	gorm.io/driver/postgres v1.5.0
 	gorm.io/gorm v1.24.7-0.20230306060331-85eaf9eeda11
